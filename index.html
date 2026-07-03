@@ -1,0 +1,2727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayara Toledo · Elegância sem Frescura</title>
+  <meta name="description" content="Método Elegância Sem Frescura by Mayara Toledo. Consultoria de imagem e mentoria para mulheres que querem se vestir com clareza, elegância e praticidade.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="mayara-hero-new4-opt.jpg">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src https://formsubmit.co; frame-ancestors 'none';">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:          #f6efe7;   /* from palette */
+      --cream-2:        #ede4d9;   /* mid cream */
+      --rose:           #d9afa1;   /* dusty rose from palette */
+      --burgundy:       #6e1f25;   /* deep burgundy from palette */
+      --burgundy-light: #8a2d3a;
+      --taupe:          #b69e7d;   /* warm taupe, decorative */
+      --gold:           #c6a664;   /* golden brass, decorative */
+      --gold-text:      #7A5830;   /* text gold — 4.9:1 on cream ✓ */
+      --dark:           #1a0f0d;
+      --text:           #3a2820;
+      --muted:          #6B5F55;   /* 5.1:1 on cream ✓ */
+      --line:           rgba(58,40,32,0.14);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+
+    body {
+      font-family: 'Pier Sans', 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── GLOBAL INTERACTIONS ── */
+    a, button, [role="button"] {
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.35s ease, padding 0.35s ease;
+    }
+    nav.scrolled {
+      background: rgba(246,239,231,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1rem 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #F0E8DC;
+      text-decoration: none;
+      transition: color 0.35s ease, opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.7; }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-cta {
+      font-family: 'Pier Sans', 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(240,232,220,0.85);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240,232,220,0.5);
+      padding-bottom: 2px;
+      transition: opacity 0.2s, color 0.4s, border-color 0.4s;
+    }
+    nav.scrolled .nav-cta { color: var(--burgundy); border-bottom-color: currentColor; }
+    .nav-cta:hover { opacity: 0.6; }
+
+    /* ── FULL-SCREEN SNAP SECTIONS ── */
+    .hero,
+    .quem-sou, .servicos,
+    .programa, .mentoria-steps, .investimento,
+    .resultados, .faq, .agendamento {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .quem-sou, .servicos,
+    .programa, .mentoria-steps, .investimento,
+    .resultados, .faq, .agendamento {
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* ── HERO — movie poster, full bleed ── */
+    .hero {
+      position: relative;
+      height: 100dvh;
+      overflow: hidden;
+    }
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      background: var(--burgundy);
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.07);
+      transform-origin: center top;
+      display: block;
+    }
+    /* scrim: heavy on left for text, medium on right for laurels, clear in centre */
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,  rgba(18,8,6,0.88) 0%, rgba(18,8,6,0.0) 48%),
+        linear-gradient(to left,   rgba(18,8,6,0.70) 0%, rgba(18,8,6,0.0) 48%),
+        linear-gradient(to bottom, rgba(18,8,6,0.30) 0%, rgba(18,8,6,0.0) 18%);
+    }
+
+    /* ── HERO OVERLAY — two-column editorial ── */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 38%;
+      padding: 7.5rem 3.5rem 3rem 3.5rem;
+      align-items: stretch;
+    }
+
+    /* LEFT column: bio at top, title at bottom */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-right: 2.5rem;
+    }
+    .hero-bio p {
+      font-size: clamp(0.875rem, 1.1vw, 1rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(240,232,220,0.62);
+      max-width: 380px;
+    }
+    .hero-bio p + p { margin-top: 0.75rem; }
+
+    .hero-title {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5.5vw, 6.5rem);
+      font-weight: 300;
+      line-height: 0.93;
+      color: #F0E8DC;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.4rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      display: block;
+    }
+    .hero-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.4rem 0;
+      opacity: 0.55;
+    }
+    .hero-name {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(240,232,220,0.45);
+      margin-bottom: 2.2rem;
+    }
+    .hero-tagline {
+      font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(240,232,220,0.68);
+      max-width: 340px;
+      margin-bottom: 2.2rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--burgundy);
+      padding: 0 2.5rem;
+      text-decoration: none;
+      transition: background 0.25s ease;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .btn-primary:hover { background: var(--dark); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* Gold CTA — for use on dark backgrounds */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      background: var(--gold);
+      padding: 0 2.5rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.15s ease;
+      align-self: flex-start;
+    }
+    .btn-gold:hover { background: #d4b878; }
+    .btn-gold:active { transform: scale(0.98); }
+
+    /* RIGHT column: laurel images */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      padding-left: 5rem;
+    }
+    .laurel-img {
+      width: clamp(130px, 16.2vw, 211px);
+      height: auto;
+      opacity: 0.95;
+      display: block;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      border: 1px solid var(--burgundy);
+      padding: 0 2.5rem;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: var(--burgundy); color: var(--cream); }
+    .btn-outline:active { transform: scale(0.98); }
+
+    /* ── MANIFESTO ── */
+    .manifesto {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: var(--burgundy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .manifesto-quote {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3.2vw, 3rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: #f6efe7;
+      max-width: 780px;
+      margin: 0 auto 2rem;
+      letter-spacing: 0.01em;
+    }
+    .manifesto-quote em {
+      font-style: italic;
+      color: var(--rose);
+    }
+    .manifesto-caption {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(246,239,231,0.55);
+    }
+
+    /* ── MENTORIA INTRO (replaces manifesto) ── */
+    .mentoria-intro {
+      background: var(--burgundy);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+    .mi-left {
+      padding: 5rem 4rem 5rem 5.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid rgba(246,239,231,0.1);
+    }
+    .mi-right {
+      padding: 5rem 5.5rem 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .mi-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 2rem;
+    }
+    .mi-title {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.8vw, 4rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #F0E8DC;
+      margin-bottom: 2rem;
+    }
+    .mi-title em { font-style: italic; color: var(--rose); }
+    .mi-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+      font-style: italic;
+      line-height: 1.65;
+      color: rgba(240,232,220,0.95);
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .mi-body {
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.9;
+      color: rgba(240,232,220,0.88);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+    .mi-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .mi-meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+    .mi-meta-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      min-width: 2.5rem;
+      flex-shrink: 0;
+    }
+    .mi-icon {
+      width: 17px;
+      height: 17px;
+      min-width: 17px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .mi-meta-text {
+      font-size: 0.8rem;
+      font-weight: 400;
+      line-height: 1.65;
+      color: rgba(240,232,220,0.88);
+    }
+    .mi-meta-text strong {
+      display: block;
+      font-weight: 500;
+      color: #F0E8DC;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.1rem;
+    }
+
+    /* ── SERVIÇOS ── */
+    .servicos {
+      background: var(--cream);
+      border-top: 3px solid var(--burgundy);
+      padding: 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      width: 100%;
+      max-width: 1100px;
+      margin-top: 2rem;
+    }
+    .servico-card {
+      background: var(--cream);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: background 0.3s;
+      border-top: 3px solid transparent;
+    }
+    .servico-card:nth-child(1) { border-top-color: var(--burgundy); }
+    .servico-card:nth-child(2) { border-top-color: var(--rose); }
+    .servico-card:nth-child(3) { border-top-color: var(--taupe); }
+    .servico-card:hover { background: var(--cream-2); }
+    .servico-tag {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      background: rgba(217,175,161,0.2);
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      align-self: flex-start;
+    }
+    .servico-title {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .servico-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text);
+      flex: 1;
+    }
+    .servico-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--burgundy);
+    }
+    .servico-cta {
+      font-family: inherit;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      text-decoration: none;
+      background: none;
+      border: none;
+      border-bottom: 1px solid currentColor;
+      padding: 0 0 2px;
+      display: inline-block;
+      margin-top: 0.5rem;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+    .servico-cta:hover { opacity: 0.55; }
+
+    /* ── SOBRE / STORY ── */
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+    .story-dark {
+      background: var(--burgundy);
+      padding: 6rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .story-pull {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.4;
+      color: #F0E8DC;
+    }
+    .story-dark .hero-divider { background: rgba(240,232,220,0.3); margin: 2.5rem 0; }
+    .story-credit {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(240,232,220,0.5);
+    }
+    .story-light {
+      background: var(--cream-2);
+      padding: 6rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .story-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      margin-bottom: 2rem;
+    }
+    .story-heading {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+      font-weight: 300;
+      line-height: 1.3;
+      color: var(--dark);
+      margin-bottom: 2rem;
+    }
+    .story-body {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text);
+      max-width: 440px;
+    }
+    .story-body + .story-body { margin-top: 1.2rem; }
+
+    /* ── PROGRAMA — 2-column split ── */
+    .programa {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      border-top: 3px solid var(--burgundy);
+    }
+    .prog-left {
+      background: #6e1f25;
+      padding: 3.5rem 3.5rem 3.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+      overflow: hidden;
+    }
+    .prog-right {
+      background: var(--cream);
+      padding: 3rem 4.5rem 3rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid var(--line);
+      overflow: hidden;
+    }
+    /* prog-right meta items on cream background */
+    .prog-right .mi-meta-text { color: var(--text); }
+    .prog-right .mi-meta-text strong { color: var(--dark); font-size: 0.82rem; }
+    .prog-right .mi-icon { color: var(--burgundy); }
+    .prog-right .section-header {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+    .prog-right .section-divider { margin: 1rem 0 0; }
+    .prog-right .sessions {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--line);
+    }
+    .prog-right .session-card {
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .prog-right .session-card:last-child { border-bottom: none; }
+    .prog-right .session-number { font-size: 1.6rem; margin-bottom: 0.25rem; }
+    .prog-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.03em;
+    }
+    .section-divider {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.5rem auto 0;
+    }
+
+    .sessions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .session-card {
+      background: var(--cream);
+      padding: 2rem 2.2rem;
+      transition: background 0.3s;
+    }
+    .session-card:hover { background: var(--cream-2); }
+    .session-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--rose);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .session-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 0.35rem;
+    }
+    .session-subtitle {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--burgundy);
+      margin-bottom: 0;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.03em;
+    }
+    .session-list {
+      list-style: none;
+      margin: 0;
+    }
+    .session-list li {
+      font-size: 0.9375rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text);
+      padding: 0.3rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .session-result {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--burgundy);
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ── DATAS ── */
+    .datas {
+      background: var(--dark);
+      padding: 3rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .datas-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: block;
+    }
+    .datas-grid {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .data-item {
+      flex: 1;
+      padding: 2rem 1.5rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .data-item:last-child { border-right: none; }
+    .data-date {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: #F0E8DC;
+      display: block;
+    }
+    .data-mes {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(240,232,220,0.4);
+      margin-top: 0.3rem;
+      display: block;
+    }
+    .datas-horario {
+      font-size: 0.8rem;
+      color: rgba(240,232,220,0.5);
+      letter-spacing: 0.08em;
+    }
+    .datas-horario span { color: var(--gold); }
+
+    /* ── PARA QUEM ── */
+    .para-quem {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100dvh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+    }
+    .para-quem-img {
+      background: var(--rose);
+      overflow: hidden;
+      position: relative;
+    }
+    .para-quem-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.7) sepia(0.15);
+      mix-blend-mode: multiply;
+    }
+    .para-quem-content {
+      background: var(--cream-2);
+      padding: 3.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .check-list {
+      list-style: none;
+      margin-top: 1.2rem;
+    }
+    .check-list li {
+      font-size: 0.9375rem;
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--text);
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .check-list li::before {
+      content: '';
+      width: 13px;
+      height: 13px;
+      min-width: 13px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B1D2E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* ── RESULTADOS ── */
+    .resultados {
+      background: var(--burgundy);
+      padding: 2.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .resultados .section-label { color: var(--gold); }
+    .resultados .section-title { color: #f6efe7; }
+    .resultados .section-sub   { color: rgba(246,239,231,0.65); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+    .resultados .section-divider { background: rgba(246,239,231,0.25); }
+    .resultados-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(246,239,231,0.12);
+      margin-top: 2rem;
+      border: 1px solid rgba(246,239,231,0.12);
+    }
+    .result-item {
+      background: rgba(246,239,231,0.05);
+      padding: 1.5rem 1.5rem;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .result-item:hover { background: rgba(246,239,231,0.1); }
+    .result-icon {
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1rem;
+      opacity: 0.8;
+    }
+    .result-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #f6efe7;
+      line-height: 1.4;
+    }
+
+    /* ── SUPORTE ── */
+    .suporte {
+      background: var(--cream-2);
+      padding: 4rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: none;
+    }
+    .suporte-text h2 {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+    .suporte-text p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text);
+      max-width: 420px;
+    }
+    .suporte-details {
+      border-left: 1px solid var(--line);
+      padding-left: 4rem;
+    }
+    .suporte-item {
+      margin-bottom: 1.2rem;
+    }
+    .suporte-item-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .suporte-item-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+
+    /* ── INVESTIMENTO ── */
+    .investimento {
+      background: var(--dark);
+      padding: 3rem 4rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .investimento .section-label  { color: var(--gold); }
+    .investimento .section-title  { color: #f6efe7; }
+    .investimento .section-sub    { color: rgba(246,239,231,0.55); }
+    .investimento .section-divider { background: var(--gold); opacity: 0.6; }
+    .preco-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .preco-divider {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: rgba(246,239,231,0.35);
+      text-transform: uppercase;
+    }
+    .preco {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: #f6efe7;
+      line-height: 1;
+    }
+    .preco small {
+      font-size: 1.5rem;
+      vertical-align: super;
+    }
+    .preco-currency {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(246,239,231,0.4);
+      display: block;
+      margin-top: 0.3rem;
+    }
+    .inclui-list {
+      list-style: none;
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+      text-align: left;
+    }
+    .inclui-list li {
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: rgba(246,239,231,0.92);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(246,239,231,0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .inclui-list li span.mark {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      min-width: 12px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c6a664' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-shrink: 0;
+    }
+    .desconto-note {
+      font-size: 0.78rem;
+      color: rgba(246,239,231,0.4);
+      margin-top: 1.5rem;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .desconto-note strong {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ── CAFE ── */
+    .cafe {
+      background: var(--cream);
+      border-top: 1px solid var(--line);
+      padding: 4rem 3rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .cafe h2 {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--dark);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+    .cafe h2 em { color: var(--burgundy); font-style: italic; }
+    .cafe p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+    .btn-stack { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 4rem 3rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-logo {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: rgba(240,232,220,0.8);
+      letter-spacing: 0.06em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(240,232,220,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #F0E8DC; }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(240,232,220,0.7);
+      letter-spacing: 0.1em;
+    }
+    .footer-powered {
+      width: 100%;
+      text-align: center;
+      font-size: 0.68rem;
+      color: rgba(240,232,220,0.45);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(240,232,220,0.08);
+      margin-top: 0.5rem;
+    }
+    .footer-powered a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      transition: opacity 0.2s;
+    }
+    .footer-powered a:hover { opacity: 0.75; }
+
+    /* ── FILM FESTIVAL LAURELS ── */
+    .laurel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 0;
+      color: #fff;
+    }
+    .laurel + .laurel {
+      border-left: 1px solid rgba(255,255,255,0.12);
+    }
+    /* Each branch is half the PNG, shown via background crop */
+    .laurel-branch {
+      flex-shrink: 0;
+      width: 28%;
+      align-self: stretch;    /* fill row height — required for 200% auto to centre correctly */
+      background-image: url('laurelswhite.png');
+      background-repeat: no-repeat;
+      background-size: 200% auto;
+      background-color: transparent;
+      opacity: 0.9;
+    }
+    .laurel-branch--l {
+      background-position: left center;
+    }
+    .laurel-branch--r {
+      background-position: left center; /* same half as left… */
+      transform: scaleX(-1);            /* …mirrored horizontally */
+    }
+
+    .laurel-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+    .laurel-cat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(0.7rem, 1vw, 0.8rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      white-space: nowrap;
+    }
+    .laurel-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1rem, 2.2vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.05;
+    }
+    .laurel-cred {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(0.65rem, 0.85vw, 0.75rem);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold); /* on dark/burgundy bg: 6–7:1 ✓ */
+      white-space: nowrap;
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: #25D366;
+      color: white;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .wa-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+    }
+    .wa-float:active { transform: scale(0.95); }
+
+    /* ── INTAKE MODAL ── */
+    .intake-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(35,28,24,0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .intake-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .intake-modal {
+      background: var(--cream);
+      max-width: 560px;
+      width: 100%;
+      max-height: 90dvh;
+      overflow-y: auto;
+      padding: 3rem 3.5rem 3.5rem;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .intake-overlay.open .intake-modal { transform: translateY(0); }
+
+    /* ── Mentoria form modal ── */
+    #mentoria-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(35,28,24,0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #mentoria-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mentoria-modal {
+      background: var(--cream);
+      max-width: 520px;
+      width: 100%;
+      max-height: 92dvh;
+      overflow-y: auto;
+      padding: 2rem 2.5rem 2.5rem;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mentoria-overlay.open .mentoria-modal { transform: translateY(0); }
+    .mentoria-step { display: none; }
+    .mentoria-step.active { display: block; }
+    .mf-textarea {
+      resize: vertical;
+      min-height: 52px;
+      line-height: 1.5;
+    }
+    .mf-progress { margin-bottom: 2rem; }
+
+    .intake-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 1.4rem;
+      line-height: 1;
+      padding: 0.4rem 0.6rem;
+      transition: color 0.2s;
+    }
+    .intake-close:hover { color: var(--dark); }
+
+    .intake-progress {
+      display: flex;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+    }
+    .intake-progress-bar {
+      height: 2px;
+      flex: 1;
+      background: var(--line);
+      transition: background 0.4s ease;
+    }
+    .intake-progress-bar.filled { background: var(--gold); }
+
+    .intake-step { display: none; }
+    .intake-step.active { display: block; }
+
+    .intake-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .intake-heading {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      font-weight: 300;
+      line-height: 1.3;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .intake-sub {
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .intake-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.5rem 0 2rem;
+      opacity: 0.5;
+    }
+
+    .intake-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .intake-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      touch-action: manipulation;
+    }
+    .intake-option:hover { border-color: rgba(191,160,122,0.6); }
+    .intake-option.selected {
+      border-color: var(--burgundy);
+      background: rgba(123,29,46,0.04);
+    }
+    .intake-option input[type="radio"],
+    .intake-option input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--burgundy);
+      flex-shrink: 0;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+    .intake-option-text {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .intake-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .intake-back {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .intake-back:hover { color: var(--dark); }
+    .intake-back:disabled { opacity: 0; pointer-events: none; }
+
+    .intake-field { margin-bottom: 0.7rem; }
+    .intake-label {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .intake-input {
+      width: 100%;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 300;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .intake-input:focus { border-color: var(--burgundy); }
+    .intake-input::placeholder { color: rgba(58,40,32,0.3); }
+    .intake-error {
+      font-size: 0.75rem;
+      color: var(--burgundy);
+      margin-top: 1rem;
+      display: none;
+    }
+    .intake-error.visible { display: block; }
+
+    @media (max-width: 600px) {
+      .intake-modal { padding: 2.5rem 1.5rem; }
+    }
+
+    /* ── META ITEMS IN CREAM (prog-right) — override light-text for dark bg ── */
+    .prog-right .mi-meta-text { color: var(--text); }
+    .prog-right .mi-meta-text strong { color: var(--dark); font-size: 0.82rem; }
+    .prog-right .mi-icon { color: var(--burgundy); }
+
+    /* ── PRICE EMPHASIS ── */
+    .preco {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: 5.5rem;
+      font-weight: 300;
+      color: #f6efe7;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .preco small { font-size: 2rem; vertical-align: super; opacity: 0.75; }
+    .preco-currency { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 0.4rem; }
+    .preco-divider { font-size: 0.8rem; letter-spacing: 0.2em; color: rgba(246,239,231,0.3); text-transform: uppercase; }
+
+    /* ── MENTORIA STEPS ── */
+    .mentoria-steps {
+      background: var(--cream);
+      padding: 3.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 1px solid var(--line);
+    }
+    .mentoria-steps-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .mentoria-steps .sessions { max-width: none; }
+
+    /* ── QUEM SOU EU ── */
+    .quem-sou {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .quem-img {
+      background: var(--rose);
+      overflow: hidden;
+      position: relative;
+    }
+    .quem-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: saturate(0.7) sepia(0.15);
+      mix-blend-mode: multiply;
+    }
+    .quem-content {
+      background: linear-gradient(to bottom right, var(--cream) 0%, rgba(182,158,125,0.09) 100%);
+      padding: 3rem 3.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    /* Journey timeline */
+    .quem-timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin: 1rem 0 1.4rem;
+    }
+    .qtl-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    .qtl-year {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      margin-bottom: 0.35rem;
+    }
+    .qtl-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .qtl-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .qtl-connector {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(198,166,100,0.5), rgba(198,166,100,0.15));
+      /* align with dot: year label (~14px) + margin-bottom (0.35rem ~5.6px) + half-dot (3.5px) ≈ 23px from top */
+      margin-top: calc(0.6rem * 1.2 + 0.35rem + 3.5px);
+      opacity: 0.7;
+    }
+
+    /* Bio */
+    .quem-bio {
+      font-size: 0.8rem;
+      font-weight: 400;
+      line-height: 1.72;
+      color: var(--text);
+      max-width: 480px;
+      margin-bottom: 0;
+    }
+    .quem-bio + .quem-bio { margin-top: 0.6rem; }
+    .quem-bio strong {
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    /* Insight callout */
+    .quem-insight {
+      margin: 1.1rem 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--burgundy);
+      letter-spacing: 0.01em;
+    }
+    .quem-insight em {
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* Signature quote */
+    .quem-quote {
+      margin: 1rem 0 0;
+      padding: 0.9rem 0 0.9rem 1.2rem;
+      border-left: 2px solid var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.85rem, 1.2vw, 0.98rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* Credentials */
+    .quem-creds {
+      margin-top: 1.2rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+      display: flex;
+      gap: 2rem;
+    }
+    .quem-cred-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .quem-cred-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+    }
+    .quem-cred-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.92rem;
+      color: var(--dark);
+    }
+
+    /* ── RESULTADOS SPLIT (resultados + depoimentos) ── */
+    .resultados-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: rgba(246,239,231,0.12);
+      border: 1px solid rgba(246,239,231,0.12);
+      margin-top: 1.6rem;
+    }
+    .resultados-col {
+      background: rgba(246,239,231,0.04);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .result-col-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(246,239,231,0.1);
+    }
+    .result-col-item:last-child { border-bottom: none; }
+    .result-col-icon {
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+      margin-top: 11px;
+      flex-shrink: 0;
+      opacity: 0.65;
+    }
+    .result-col-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: #f6efe7;
+      line-height: 1.4;
+    }
+    .depo-col {
+      border-left: 1px solid rgba(246,239,231,0.12);
+      display: flex;
+      flex-direction: column;
+    }
+    .depo-card {
+      background: rgba(246,239,231,0.05);
+      padding: 1.2rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(246,239,231,0.1);
+    }
+    .depo-card:last-child { border-bottom: none; }
+    .depo-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.975rem;
+      font-style: italic;
+      color: rgba(246,239,231,0.95);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .depo-author {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      background: #f5eae4; /* rose-cream blend: cream + rose wash */
+      padding: 3.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .faq-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 1.15rem 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--burgundy); }
+    .faq-question::after {
+      content: '+';
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-question { color: var(--burgundy); }
+    .faq-item.open .faq-question::after { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; }
+    .faq-answer p {
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--text);
+      padding-bottom: 1.2rem;
+    }
+
+    /* ── AGENDAMENTO ── */
+    .agendamento {
+      background: linear-gradient(155deg, var(--cream) 45%, rgba(217,175,161,0.22) 100%);
+      border-top: 1px solid var(--line);
+      padding: 3.5rem 6rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+    }
+    /* ── oval portrait card ── */
+    .agendamento-photo-wrap {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+    }
+    .agendamento-oval {
+      position: relative;
+      width: 200px;
+      height: 260px;
+    }
+    /* gold ring slightly larger than the oval */
+    .agendamento-oval::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50% / 42%;
+      border: 1px solid rgba(198,166,100,0.55);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .agendamento-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 50% / 40%;
+    }
+    .agendamento-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-align: center;
+    }
+    .agendamento-creds {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      position: relative;
+    }
+    .agendamento-creds::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+      margin: 0 auto 0.4rem;
+    }
+    .agendamento-creds span {
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+    /* ── text column ── */
+    .agendamento-text {
+      text-align: left;
+      max-width: 460px;
+    }
+    .agendamento h2 {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.18;
+      color: var(--dark);
+      margin: 0 0 1.4rem;
+    }
+    .agendamento h2 em { color: var(--burgundy); font-style: italic; }
+    .agendamento-text > p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 380px;
+      margin: 0 0 2.5rem;
+      line-height: 1.85;
+    }
+
+    /* ── SECTION DEPTH: top-shadow on every snap section ── */
+    .quem-sou, .servicos, .mentoria-steps, .faq, .agendamento {
+      position: relative;
+    }
+    /* no top borders between sections */
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      will-change: opacity, transform;
+      /* ease-out-expo: fast start, very smooth deceleration (Apple/iOS feel) */
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.18s; }
+    .reveal-delay-3 { transition-delay: 0.30s; }
+    .reveal-delay-4 { transition-delay: 0.44s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        will-change: auto;
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+
+      /* ── Disable scroll snap on mobile: let content flow naturally ── */
+      html { scroll-snap-type: none; }
+      .hero,
+      .quem-sou, .servicos,
+      .programa, .mentoria-steps, .investimento,
+      .resultados, .faq, .agendamento {
+        scroll-snap-align: none;
+        scroll-snap-stop: normal;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+      }
+
+      /* ── Nav ── */
+      nav { padding: 1rem 1.25rem; }
+      nav.scrolled { padding: 0.75rem 1.25rem; }
+
+      /* ── Hero ── */
+      .hero { height: 100dvh; max-height: 100dvh; overflow: hidden; }
+      .hero-overlay {
+        grid-template-columns: 1fr;
+        padding: 6rem 1.5rem 2.5rem;
+      }
+      .hero-right { display: none; }
+      .hero-left {
+        padding-right: 0;
+        justify-content: flex-end;
+        gap: 2rem;
+      }
+      .hero-title { font-size: clamp(2.6rem, 10vw, 4rem); }
+      .hero-tagline { font-size: 0.9rem; max-width: 100%; }
+      .btn-primary { min-height: 52px; font-size: 0.72rem; }
+
+      /* ── Quem sou eu: full-width content, no image ── */
+      .quem-sou { grid-template-columns: 1fr; }
+      .quem-img { display: none; }
+      .quem-content {
+        padding: 3rem 1.5rem 2.5rem;
+        justify-content: flex-start;
+        overflow-y: auto;
+      }
+      .quem-timeline { gap: 0; margin: 0.8rem 0 1rem; }
+      .qtl-year { font-size: 0.55rem; }
+      .qtl-label { font-size: 0.7rem; }
+      .quem-bio { font-size: 0.875rem; line-height: 1.7; }
+      .quem-quote { font-size: 0.88rem; }
+      .quem-creds { flex-direction: column; gap: 0.6rem; }
+
+      /* ── Serviços ── */
+      .servicos { padding: 3rem 1.5rem 2rem; }
+      .servicos-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .servico-card { padding: 1.75rem 1.5rem; }
+      .servico-cta { min-height: 52px; width: 100%; justify-content: center; }
+
+      /* ── Programa ── */
+      .programa { grid-template-columns: 1fr; border-top: 3px solid var(--burgundy); }
+      .prog-left { padding: 3rem 1.5rem; }
+      .prog-right { padding: 2.5rem 1.5rem; border-left: none; border-top: 1px solid var(--line); }
+
+      /* ── Mentoria steps ── */
+      .mentoria-steps { padding: 2.5rem 1.5rem; }
+      .sessions { grid-template-columns: 1fr; }
+      .session-card { padding: 2rem 1.5rem; }
+      .datas-grid { flex-wrap: wrap; }
+      .data-item {
+        flex: 1 1 40%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .suporte { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .suporte-details {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 2rem;
+      }
+
+      /* ── Investimento ── */
+      .investimento { padding: 3rem 1.5rem; }
+
+      /* ── Resultados ── */
+      .resultados { padding: 2rem 1.5rem; }
+      .resultados-split { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+
+      /* ── FAQ ── */
+      .faq { padding: 2.5rem 1.5rem; }
+
+      /* ── Agendamento ── */
+      .agendamento { padding: 2.5rem 1.5rem; flex-direction: column; gap: 2rem; }
+      .agendamento-text { text-align: center; }
+      .agendamento-text > p { margin-left: auto; margin-right: auto; }
+      .agendamento-oval { width: 140px; height: 182px; }
+      .btn-stack { justify-content: center; }
+
+      /* ── Misc ── */
+      .story, .story-dark, .story-light { grid-template-columns: 1fr; }
+      .story-dark, .story-light { padding: 3rem 1.5rem; }
+      .manifesto { padding: 2rem 1.5rem; }
+      .section-title { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 2.5rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Mayara Toledo</a>
+    <a href="#servicos" class="nav-cta">Serviços</a>
+  </nav>
+
+  <!-- HERO — editorial two-column, full bleed -->
+  <section class="hero">
+    <div class="hero-image">
+      <img
+        src="mayara-hero-new4-opt.jpg"
+        alt="Mayara Toledo · Consultora de Imagem"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+
+    <div class="hero-overlay">
+
+      <!-- LEFT: bio at top, identity/title at bottom -->
+      <div class="hero-left">
+        <div class="hero-identity">
+          <h1 class="hero-title reveal reveal-delay-1">
+            <em>Elegância</em>
+            sem Frescura
+          </h1>
+          <div class="hero-divider reveal reveal-delay-2"></div>
+          <p class="hero-tagline reveal reveal-delay-2">Reconecte-se com quem você é. Construa um guarda-roupa elegante, prático e coerente com a mulher que você se tornou.</p>
+          <a href="#mentoria" class="btn-primary reveal reveal-delay-3">
+            Quero participar
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: laurel images -->
+      <div class="hero-right reveal reveal-delay-2">
+        <img src="laurelnew1.png" alt="Reconexão" class="laurel-img">
+        <img src="Laurelnew2.png" alt="Estilo" class="laurel-img">
+        <img src="Laurelnew3.png" alt="Identidade" class="laurel-img">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUEM SOU EU -->
+  <section class="quem-sou" id="quem-sou">
+    <div class="quem-img">
+      <img src="Mayara Toledo-35-opt.jpg" alt="Mayara Toledo" loading="lazy">
+    </div>
+    <div class="quem-content">
+      <span class="section-label reveal">Quem sou eu</span>
+      <h2 class="section-title reveal reveal-delay-1" style="text-align:left;margin-bottom:0.5rem;">
+        Mayara Toledo
+      </h2>
+
+      <!-- Journey timeline -->
+      <div class="quem-timeline reveal reveal-delay-2">
+        <div class="qtl-item">
+          <span class="qtl-year">Infância</span>
+          <div class="qtl-dot"></div>
+          <span class="qtl-label">Elegância<br>herdada</span>
+        </div>
+        <div class="qtl-connector"></div>
+        <div class="qtl-item">
+          <span class="qtl-year">Aos 15</span>
+          <div class="qtl-dot"></div>
+          <span class="qtl-label">Moda &amp;<br>audiovisual</span>
+        </div>
+        <div class="qtl-connector"></div>
+        <div class="qtl-item">
+          <span class="qtl-year">Aos 22</span>
+          <div class="qtl-dot"></div>
+          <span class="qtl-label">Recomeço<br>na Inglaterra</span>
+        </div>
+        <div class="qtl-connector"></div>
+        <div class="qtl-item">
+          <span class="qtl-year">Hoje</span>
+          <div class="qtl-dot"></div>
+          <span class="qtl-label">Método<br>ESF</span>
+        </div>
+      </div>
+
+      <p class="quem-bio reveal reveal-delay-2">
+        A imagem sempre esteve presente na minha vida antes de se tornar profissão. Cresci rodeada por mulheres com um olhar refinado, onde qualidade e elegância importavam mais do que tendências.
+      </p>
+      <p class="quem-bio reveal reveal-delay-2">
+        Trabalhei em moda, vivi os bastidores da televisão no Rio de Janeiro e, aos 22 anos, recomecei do zero na Inglaterra, até chegar ao ambiente corporativo de uma das maiores sociedades de advocacia do mundo.
+      </p>
+      <p class="quem-bio reveal reveal-delay-2">
+        Foi lá que vi algo que não conseguia ignorar: mulheres competentes, em posições de liderança, que não se sentiam representadas pela própria imagem. <em>Me reconheci naquilo.</em>
+      </p>
+      <p class="quem-bio reveal reveal-delay-2">
+        Decidi estudar imagem, primeiro para me transformar. E percebi na prática: <strong>imagem não é sobre roupas. É sobre coerência.</strong>
+      </p>
+
+      <blockquote class="quem-quote reveal reveal-delay-2">
+        "Foi dessa percepção que nasceu o <strong style="font-style:normal;font-weight:600;color:var(--burgundy);">Elegância Sem Frescura</strong>, um método para mulheres que querem construir uma imagem sofisticada e autêntica, sem excessos e sem regras rígidas. Porque quando a sua imagem está alinhada com quem você é, tudo ao seu redor começa a responder diferente."
+      </blockquote>
+
+      <div class="quem-creds reveal reveal-delay-3">
+        <div class="quem-cred-item">
+          <span class="quem-cred-label">Formação</span>
+          <span class="quem-cred-value">Renata Meins · CHIC</span>
+        </div>
+        <div class="quem-cred-item">
+          <span class="quem-cred-label">Especialização</span>
+          <span class="quem-cred-value">Clelia Midori · Conceito Mid</span>
+        </div>
+        <div class="quem-cred-item">
+          <span class="quem-cred-label">Especialização</span>
+          <span class="quem-cred-value">Kibbe Body Types</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="servicos" id="servicos">
+    <div class="section-header">
+      <span class="section-label reveal">Como posso te ajudar</span>
+      <h2 class="section-title reveal reveal-delay-1">Nossos Serviços</h2>
+      <div class="section-divider reveal reveal-delay-2"></div>
+    </div>
+
+    <div class="servicos-grid">
+
+      <div class="servico-card reveal">
+        <span class="servico-tag">Mentoria em grupo</span>
+        <h3 class="servico-title">Elegância sem Frescura</h3>
+        <p class="servico-desc">4 encontros online e ao vivo pelo Google Meet. Um método para construir uma imagem coerente com quem você é, sem seguir tendências cegas. Turma pequena para acompanhamento próximo. Material de apoio + suporte no WhatsApp incluídos.</p>
+        <span class="servico-price">R$ 547 · £ 79</span>
+        <button class="servico-cta" onclick="openMentoriaForm()">Reservar minha vaga →</button>
+      </div>
+
+      <div class="servico-card reveal reveal-delay-1">
+        <span class="servico-tag">Curadoria mensal</span>
+        <h3 class="servico-title">Catálogo do Reino Unido</h3>
+        <p class="servico-desc">Assine e receba mensalmente uma seleção curada das melhores peças de Marks &amp; Spencer, Next, Zara UK, &amp;Other Stories e River Island, filtrada pelo estilo britânico atemporal que funciona para a mulher que vive fora do Brasil, sem perder a identidade.</p>
+        <span class="servico-price">Assinatura mensal · sob consulta</span>
+        <a href="https://wa.me/447300462457" class="servico-cta" target="_blank" rel="noopener">Saber mais →</a>
+      </div>
+
+      <div class="servico-card reveal reveal-delay-2">
+        <span class="servico-tag">Consultoria 1:1</span>
+        <h3 class="servico-title">Consultoria Individual</h3>
+        <p class="servico-desc">Um encontro personalizado e exclusivo para análise do seu guarda-roupa, mapeamento do seu perfil de estilo e criação de um plano de ação concreto. Para quem quer resultado com atenção individual e dedicada.</p>
+        <span class="servico-price">Sessão única · sob consulta</span>
+        <button class="servico-cta" onclick="openIntake()">Agendar uma conversa →</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MENTORIA: INTRODUÇÃO -->
+  <section class="programa" id="mentoria">
+
+    <div class="prog-left">
+      <span class="mi-eyebrow reveal">Mentoria em Grupo</span>
+      <h2 class="mi-title reveal reveal-delay-1">
+        Elegância<br><em>sem Frescura</em>
+      </h2>
+      <p class="section-sub reveal reveal-delay-1" style="color:rgba(240,232,220,0.55);margin-bottom:0.5rem;">4 encontros online e ao vivo · Turma Fundadora</p>
+      <div class="hero-divider reveal reveal-delay-1" style="margin:1.2rem 0;"></div>
+      <blockquote class="mi-quote reveal reveal-delay-2">
+        "Existe uma diferença entre parecer bem-vestida<br>e sentir-se inteira.<br>
+        <em>Esta mentoria é sobre a segunda.</em>"
+      </blockquote>
+      <p class="mi-body reveal reveal-delay-2">
+        Não é um curso sobre tendências. É um método de quatro encontros online e ao vivo para que você construa uma imagem coerente com quem você se tornou, com clareza, intenção e elegância real.
+      </p>
+      <button class="btn-gold" onclick="openMentoriaForm()" style="margin-top:auto;">
+        Quero participar
+      </button>
+    </div>
+
+    <div class="prog-right" style="gap:0;padding:2.5rem 4rem 2.5rem 3rem;">
+      <div class="prog-meta reveal">
+        <div class="mi-meta-item" style="margin-bottom:0.7rem;">
+          <svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div class="mi-meta-text"><strong>Turma Fundadora</strong>11 Jul · 18 Jul · 25 Jul · 01 Ago</div>
+        </div>
+        <div class="mi-meta-item" style="margin-bottom:0.7rem;">
+          <svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="mi-meta-text"><strong>04 Encontros ao vivo</strong>Sextas, 17h UK · 13h BR. Aprox. 1h25 cada.</div>
+        </div>
+        <div class="mi-meta-item" style="margin-bottom:0.7rem;">
+          <svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="mi-meta-text"><strong>Turma pequena</strong>Cuidadosamente selecionada para acompanhamento próximo.</div>
+        </div>
+        <div class="mi-meta-item" style="margin-bottom:0.7rem;">
+          <svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div class="mi-meta-text"><strong>Suporte WhatsApp</strong>Grupo exclusivo com Mayara entre os encontros.</div>
+        </div>
+        <div class="mi-meta-item">
+          <svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="mi-meta-text"><strong>Material de apoio</strong>Exercícios práticos e guias exclusivos por sessão.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MENTORIA: ETAPAS -->
+  <section class="mentoria-steps">
+    <div class="mentoria-steps-inner">
+      <div class="section-header" style="text-align:left;margin-bottom:2rem;">
+        <span class="section-label reveal">O Programa</span>
+        <h2 class="section-title reveal reveal-delay-1">4 Encontros, 4 Transformações</h2>
+        <div class="section-divider reveal reveal-delay-2" style="margin-left:0;"></div>
+      </div>
+      <div class="sessions reveal reveal-delay-2">
+        <div class="session-card">
+          <div class="session-number">01</div>
+          <h3 class="session-title">Guarda-Roupa Detox</h3>
+          <p class="session-subtitle">Abra espaço para a mulher que você está se tornando.</p>
+        </div>
+        <div class="session-card">
+          <div class="session-number">02</div>
+          <h3 class="session-title">Tecidos e Qualidade</h3>
+          <p class="session-subtitle">Compre menos. Escolha melhor.</p>
+        </div>
+        <div class="session-card">
+          <div class="session-number">03</div>
+          <h3 class="session-title">Os 7 Estilos Universais</h3>
+          <p class="session-subtitle">Descubra por que algumas roupas parecem "você" e outras nunca fazem sentido.</p>
+        </div>
+        <div class="session-card">
+          <div class="session-number">04</div>
+          <h3 class="session-title">Fechamento e Plano de Continuidade</h3>
+          <p class="session-subtitle">Transformando conhecimento em hábito.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORIA: OFERTA E PREÇO -->
+  <section class="investimento">
+    <span class="section-label reveal">Investimento</span>
+    <h2 class="section-title reveal reveal-delay-1">Turma Fundadora</h2>
+    <p class="section-sub reveal reveal-delay-2">
+      Vagas limitadas para que Mayara possa acompanhar cada aluna de perto.
+    </p>
+    <div class="section-divider reveal reveal-delay-2"></div>
+    <div class="preco-wrapper reveal reveal-delay-3">
+      <div>
+        <span class="preco"><small>R$</small>547</span>
+        <span class="preco-currency">Reais · Brasil</span>
+      </div>
+      <span class="preco-divider">ou</span>
+      <div>
+        <span class="preco"><small>£</small>79</span>
+        <span class="preco-currency">Libras · Reino Unido</span>
+      </div>
+    </div>
+    <ul class="inclui-list reveal reveal-delay-3">
+      <li><span class="mark"></span> 4 encontros online e ao vivo pelo Google Meet</li>
+      <li><span class="mark"></span> Acompanhamento durante toda a mentoria via WhatsApp</li>
+      <li><span class="mark"></span> Grupo exclusivo com suporte entre encontros</li>
+      <li><span class="mark"></span> Exercícios práticos para cada semana</li>
+      <li><span class="mark"></span> Material de apoio exclusivo</li>
+      <li><span class="mark"></span> Acesso direto à Mayara durante o programa</li>
+    </ul>
+    <button class="btn-primary reveal reveal-delay-4" onclick="openMentoriaForm()" style="display:block;max-width:280px;text-align:center;margin:0 auto;border:none;cursor:pointer;">
+      Quero!
+    </button>
+  </section>
+
+  <!-- RESULTADOS E DEPOIMENTOS -->
+  <section class="resultados" id="resultados">
+    <div class="resultados-inner">
+      <div class="section-header">
+        <span class="section-label reveal">Resultados e Depoimentos</span>
+        <h2 class="section-title reveal reveal-delay-1">O que você vai conquistar</h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+      </div>
+      <div class="resultados-split reveal reveal-delay-2">
+        <div class="resultados-col">
+          <div class="result-col-item">
+            <span class="result-col-icon"></span>
+            <p class="result-col-text">Um guarda-roupa que faz sentido para sua vida hoje</p>
+          </div>
+          <div class="result-col-item">
+            <span class="result-col-icon"></span>
+            <p class="result-col-text">Clareza sobre seu estilo e identidade visual</p>
+          </div>
+          <div class="result-col-item">
+            <span class="result-col-icon"></span>
+            <p class="result-col-text">Mais segurança e consciência para comprar</p>
+          </div>
+          <div class="result-col-item">
+            <span class="result-col-icon"></span>
+            <p class="result-col-text">Conhecimento para reconhecer qualidade em tecidos e peças</p>
+          </div>
+          <div class="result-col-item">
+            <span class="result-col-icon"></span>
+            <p class="result-col-text">Uma imagem coerente com quem você é hoje</p>
+          </div>
+        </div>
+        <div class="depo-col">
+          <div class="depo-card">
+            <p class="depo-quote">"Finalmente entendo por que certas roupas nunca me fizeram sentido. Em quatro semanas aprendi mais sobre mim mesma do que em anos comprando por impulso."</p>
+            <span class="depo-author">Ana C. · São Paulo</span>
+          </div>
+          <div class="depo-card">
+            <p class="depo-quote">"A Mayara tem um dom de traduzir imagem em algo muito pessoal. Saí da consultoria sabendo exatamente o que quero e o que não quero mais no meu guarda-roupa."</p>
+            <span class="depo-author">Fernanda M. · Londres</span>
+          </div>
+          <div class="depo-card">
+            <p class="depo-quote">"Deixei de me vestir para os outros e passei a me vestir para mim. Parece simples, mas mudou tudo."</p>
+            <span class="depo-author">Juliana B. · Manchester</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERGUNTAS FREQUENTES -->
+  <section class="faq" id="faq">
+    <div class="faq-inner">
+      <div class="section-header" style="text-align:left;margin-bottom:1.8rem;">
+        <span class="section-label reveal">Dúvidas frequentes</span>
+        <h2 class="section-title reveal reveal-delay-1">Perguntas frequentes</h2>
+        <div class="section-divider reveal reveal-delay-2" style="margin-left:0;"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question">Para quem é a mentoria Elegância sem Frescura?</button>
+          <div class="faq-answer"><p>Para mulheres que sentem que o guarda-roupa já não representa quem são, que querem parar de comprar por impulso e construir uma imagem elegante de forma prática. Não é preciso ter muito dinheiro: é preciso ter clareza e intenção.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question">Preciso morar no Reino Unido para participar?</button>
+          <div class="faq-answer"><p>Não. A mentoria é online via Google Meet e aceita alunas do Brasil e do Reino Unido. Os encontros acontecem às sextas, 17h UK · 13h BR, com gravação disponível para quem não puder ao vivo.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question">E se eu não puder participar de algum encontro ao vivo?</button>
+          <div class="faq-answer"><p>Todos os encontros são gravados e disponibilizados no mesmo dia. Você não perde nada, e o grupo de suporte no WhatsApp está sempre ativo entre as sessões.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-question">Qual a diferença entre a mentoria em grupo e a consultoria individual?</button>
+          <div class="faq-answer"><p>A mentoria em grupo é um método de 4 encontros focado em construção de estilo com acompanhamento coletivo. A consultoria individual é um encontro 1:1 dedicado exclusivamente a você: análise de guarda-roupa, perfil de estilo e plano de ação personalizado.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-question">Como funciona o Catálogo do Reino Unido?</button>
+          <div class="faq-answer"><p>É uma curadoria mensal de peças selecionadas em Marks &amp; Spencer, Next, Zara UK, &amp;Other Stories e River Island, filtradas pelo seu estilo e perfil. Você recebe uma seleção pronta para comprar, sem perder tempo procurando.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENDAMENTO -->
+  <section class="agendamento" id="agendamento">
+    <div class="agendamento-photo-wrap reveal">
+      <div class="agendamento-oval">
+        <img src="Mayara Toledo-11-opt.jpg" alt="Mayara Toledo" class="agendamento-photo" loading="lazy">
+      </div>
+      <p class="agendamento-name">Mayara Toledo</p>
+      <div class="agendamento-creds">
+        <span>Estrategista de Imagem Pessoal</span>
+        <span>Colorimetria</span>
+        <span>Kibbe Body Type</span>
+      </div>
+    </div>
+    <div class="agendamento-text">
+      <h2 class="reveal">
+        Ainda tem dúvidas?<br>
+        <em>Vamos conversar.</em>
+      </h2>
+      <p class="reveal reveal-delay-1">
+        Agende uma conversa rápida com Mayara para entender qual serviço faz mais sentido para você agora. Sem compromisso.
+      </p>
+      <div class="btn-stack reveal reveal-delay-2">
+        <button class="btn-primary" onclick="openIntake()">
+          Agendar conversa
+        </button>
+        <a href="https://www.instagram.com/bymayaratoledo/" class="btn-outline" target="_blank" rel="noopener">
+          Ver no Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Mayara Toledo</span>
+    <ul class="footer-links">
+      <li><a href="https://www.instagram.com/bymayaratoledo/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://wa.me/447300462457" target="_blank" rel="noopener">WhatsApp</a></li>
+      <li><a href="https://cal.com/mayaratoledo/primeira-reuniao" target="_blank" rel="noopener">Agendar Conversa</a></li>
+      <li><a href="#mentoria" onclick="setTimeout(openMentoriaForm,400)">Reservar Vaga</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Mayara Toledo · Elegância sem Frescura</span>
+    <span class="footer-powered">empowered by <a href="https://lexiscale.ai" target="_blank" rel="noopener">lexiscale</a></span>
+  </footer>
+
+  <!-- INTAKE MODAL -->
+  <div class="intake-overlay" id="intake-overlay" role="dialog" aria-modal="true" aria-label="Pré-agendamento">
+    <div class="intake-modal">
+      <button class="intake-close" id="intake-close" aria-label="Fechar">×</button>
+
+      <!-- Progress bars (4 steps) -->
+      <div class="intake-progress" aria-hidden="true">
+        <div class="intake-progress-bar" id="bar-0"></div>
+        <div class="intake-progress-bar" id="bar-1"></div>
+        <div class="intake-progress-bar" id="bar-2"></div>
+        <div class="intake-progress-bar" id="bar-3"></div>
+      </div>
+
+      <!-- Step 0: Welcome -->
+      <div class="intake-step active" id="step-0">
+        <span class="intake-eyebrow">Antes de agendar</span>
+        <h2 class="intake-heading">Vamos nos conhecer melhor?</h2>
+        <p class="intake-sub">
+          Três perguntas rápidas e seus dados de contato para que Mayara possa chegar ao nosso café já com uma visão do que você precisa.
+        </p>
+        <div class="intake-divider"></div>
+        <div class="intake-nav">
+          <button class="intake-back" disabled aria-label="Voltar" aria-hidden="true"></button>
+          <button class="btn-primary" onclick="goToStep(1)">Começar</button>
+        </div>
+      </div>
+
+      <!-- Step 1: Motivation -->
+      <div class="intake-step" id="step-1">
+        <span class="intake-eyebrow">Pergunta 1 de 3</span>
+        <h2 class="intake-heading">O que te trouxe até aqui?</h2>
+        <div class="intake-options" id="opts-1">
+          <label class="intake-option">
+            <input type="radio" name="q1" value="Sinto que meu guarda-roupa não me representa mais">
+            <span class="intake-option-text">Sinto que meu guarda-roupa não me representa mais</span>
+          </label>
+          <label class="intake-option">
+            <input type="radio" name="q1" value="Quero parar de comprar por impulso e construir um estilo próprio">
+            <span class="intake-option-text">Quero parar de comprar por impulso e construir um estilo próprio</span>
+          </label>
+          <label class="intake-option">
+            <input type="radio" name="q1" value="Estou em uma transição de vida e quero reinventar minha imagem">
+            <span class="intake-option-text">Estou em uma transição de vida e quero reinventar minha imagem</span>
+          </label>
+          <label class="intake-option">
+            <input type="radio" name="q1" value="Busco mais confiança e clareza ao me vestir no dia a dia">
+            <span class="intake-option-text">Busco mais confiança e clareza ao me vestir no dia a dia</span>
+          </label>
+        </div>
+        <div class="intake-nav">
+          <button class="intake-back" onclick="goToStep(0)">← Voltar</button>
+          <button class="btn-primary" onclick="goToStep(2)">Continuar</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Wardrobe situation -->
+      <div class="intake-step" id="step-2">
+        <span class="intake-eyebrow">Pergunta 2 de 3</span>
+        <h2 class="intake-heading">Como está sua relação com seu guarda-roupa hoje?</h2>
+        <div class="intake-options" id="opts-2">
+          <label class="intake-option">
+            <input type="radio" name="q2" value="Tenho muitas roupas mas sinto que não tenho nada para vestir">
+            <span class="intake-option-text">Tenho muitas roupas, mas sinto que não tenho nada para vestir</span>
+          </label>
+          <label class="intake-option">
+            <input type="radio" name="q2" value="Compro muito mas raramente uso o que compro">
+            <span class="intake-option-text">Compro muito, mas raramente uso o que compro</span>
+          </label>
+          <label class="intake-option">
+            <input type="radio" name="q2" value="Minha imagem não reflete quem sou ou quem me tornei">
+            <span class="intake-option-text">Minha imagem não reflete quem sou ou quem me tornei</span>
+          </label>
+          <label class="intake-option">
+            <input type="radio" name="q2" value="Não sei por onde começar para criar um guarda-roupa funcional">
+            <span class="intake-option-text">Não sei por onde começar para criar um guarda-roupa funcional</span>
+          </label>
+        </div>
+        <div class="intake-nav">
+          <button class="intake-back" onclick="goToStep(1)">← Voltar</button>
+          <button class="btn-primary" onclick="goToStep(3)">Continuar</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Expectations (multi-select) -->
+      <div class="intake-step" id="step-3">
+        <span class="intake-eyebrow">Pergunta 3 de 3</span>
+        <h2 class="intake-heading">O que você espera desta conversa?</h2>
+        <p class="intake-sub" style="margin-bottom:1.2rem;">Pode marcar mais de uma opção.</p>
+        <div class="intake-options" id="opts-3">
+          <label class="intake-option">
+            <input type="checkbox" name="q3" value="Entender se a mentoria é certa para mim">
+            <span class="intake-option-text">Entender se a mentoria é certa para mim</span>
+          </label>
+          <label class="intake-option">
+            <input type="checkbox" name="q3" value="Clareza sobre meu estilo e identidade visual">
+            <span class="intake-option-text">Clareza sobre meu estilo e identidade visual</span>
+          </label>
+          <label class="intake-option">
+            <input type="checkbox" name="q3" value="Orientação prática para começar a transformação do meu guarda-roupa">
+            <span class="intake-option-text">Orientação prática para começar a transformação do meu guarda-roupa</span>
+          </label>
+          <label class="intake-option">
+            <input type="checkbox" name="q3" value="Conhecer melhor o método da Mayara">
+            <span class="intake-option-text">Conhecer melhor o método da Mayara</span>
+          </label>
+        </div>
+        <div class="intake-nav">
+          <button class="intake-back" onclick="goToStep(2)">← Voltar</button>
+          <button class="btn-primary" onclick="goToStep(4)">Continuar</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Contact info -->
+      <div class="intake-step" id="step-4">
+        <span class="intake-eyebrow">Seus dados</span>
+        <h2 class="intake-heading">Como a Mayara pode te contatar?</h2>
+        <p class="intake-sub" style="margin-bottom:1.5rem;">Preencha abaixo para confirmar o agendamento.</p>
+        <div class="intake-field">
+          <label class="intake-label" for="contact-name">Nome completo *</label>
+          <input type="text" id="contact-name" class="intake-input" placeholder="Seu nome" autocomplete="name">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="contact-email">E-mail *</label>
+          <input type="email" id="contact-email" class="intake-input" placeholder="seu@email.com" autocomplete="email">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="contact-phone">WhatsApp (opcional)</label>
+          <input type="tel" id="contact-phone" class="intake-input" placeholder="+44 ou +55..." autocomplete="tel">
+        </div>
+        <p class="intake-error" id="contact-error">Por favor, preencha nome e e-mail antes de continuar.</p>
+        <div class="intake-nav">
+          <button class="intake-back" onclick="goToStep(3)">← Voltar</button>
+          <button class="btn-primary" onclick="finishIntake()">Agendar meu café →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- MENTORIA FORM MODAL -->
+  <div id="mentoria-overlay" role="dialog" aria-modal="true" aria-label="Início da sua jornada de estilo">
+    <div class="mentoria-modal">
+      <button class="intake-close" id="mentoria-close" aria-label="Fechar">&times;</button>
+
+      <!-- Contact + Stripe -->
+      <div id="mf-step-1" class="mentoria-step active">
+        <span class="intake-eyebrow">Início da sua jornada de estilo</span>
+        <h2 class="intake-heading">Reservar a sua vaga</h2>
+        <p class="intake-sub">Preencha os seus dados e será redirecionada para o pagamento seguro.</p>
+        <div class="intake-field">
+          <label class="intake-label" for="mf-name">Nome completo *</label>
+          <input type="text" id="mf-name" class="intake-input" placeholder="Seu nome" autocomplete="name">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="mf-email">E-mail *</label>
+          <input type="email" id="mf-email" class="intake-input" placeholder="seu@email.com" autocomplete="email">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="mf-phone">WhatsApp (opcional)</label>
+          <input type="tel" id="mf-phone" class="intake-input" placeholder="+44 ou +55..." autocomplete="tel">
+        </div>
+        <p class="intake-error" id="mf-error">Por favor, preencha nome e e-mail antes de continuar.</p>
+        <div class="intake-nav" style="justify-content:flex-end;">
+          <button class="btn-primary" onclick="submitMentoriaForm()">Garantir minha vaga →</button>
+        </div>
+      </div>
+
+      <!-- Sending -->
+      <div id="mf-step-sending" class="mentoria-step" style="text-align:center;padding:4rem 1rem;">
+        <div style="font-family:'Safira March',serif;font-size:2.5rem;color:var(--gold);margin-bottom:1.2rem;">✦</div>
+        <p class="intake-heading" style="font-size:1.4rem;">A processar...</p>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">A redirecionar para o pagamento.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ── INTAKE MODAL ──
+    const intakeOverlay = document.getElementById('intake-overlay');
+
+    function openIntake() {
+      document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-0').classList.add('active');
+      document.querySelectorAll('.intake-modal input[type="radio"], .intake-modal input[type="checkbox"]').forEach(i => { i.checked = false; });
+      document.querySelectorAll('.intake-option').forEach(o => o.classList.remove('selected'));
+      document.getElementById('contact-name').value = '';
+      document.getElementById('contact-email').value = '';
+      document.getElementById('contact-phone').value = '';
+      document.getElementById('contact-error').classList.remove('visible');
+      updateBars(0);
+      intakeOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeIntake() {
+      intakeOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function goToStep(n) {
+      document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-' + n).classList.add('active');
+      updateBars(n);
+    }
+
+    function updateBars(step) {
+      [0,1,2,3].forEach(i => {
+        document.getElementById('bar-' + i).classList.toggle('filled', step > i);
+      });
+    }
+
+    async function finishIntake() {
+      const name  = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const phone = document.getElementById('contact-phone').value.trim();
+      const errEl = document.getElementById('contact-error');
+
+      if (!name || !email) {
+        errEl.classList.add('visible');
+        return;
+      }
+      errEl.classList.remove('visible');
+
+      const q1 = document.querySelector('input[name="q1"]:checked')?.value || '';
+      const q2 = document.querySelector('input[name="q2"]:checked')?.value || '';
+      const q3 = [...document.querySelectorAll('input[name="q3"]:checked')].map(i => i.value).join(' · ');
+
+      // Submit to email via Formspree
+      try {
+        await fetch('https://formsubmit.co/ajax/bymayatoledo@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            nome: name,
+            email: email,
+            whatsapp: phone || 'não informado',
+            motivacao: q1,
+            guarda_roupa: q2,
+            expectativas: q3,
+            _subject: 'Novo agendamento: ' + name,
+            _cc: 'testlexiscale@gmail.com',
+            _replyto: email
+          })
+        });
+      } catch(e) { console.error("Form submission error:", e); }
+
+      // Open cal.com with pre-filled notes
+      const lines = [];
+      if (q1) lines.push('O que me trouxe aqui: ' + q1);
+      if (q2) lines.push('Meu guarda-roupa hoje: ' + q2);
+      if (q3) lines.push('Expectativas: ' + q3);
+      const notes = lines.join('\n');
+      const base = 'https://cal.com/mayaratoledo/primeira-reuniao';
+      const url = notes ? base + '?notes=' + encodeURIComponent(notes) : base;
+      closeIntake();
+      window.open(url, '_blank', 'noopener');
+    }
+
+    // option click toggling
+    document.querySelectorAll('.intake-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const input = opt.querySelector('input');
+        if (input.type === 'radio') {
+          opt.closest('.intake-options').querySelectorAll('.intake-option')
+            .forEach(o => o.classList.remove('selected'));
+          input.checked = true;
+        } else {
+          input.checked = !input.checked;
+        }
+        opt.classList.toggle('selected', input.checked);
+      });
+    });
+
+    // ── FAQ ACCORDION ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    document.getElementById('intake-close').addEventListener('click', closeIntake);
+    intakeOverlay.addEventListener('click', e => { if (e.target === intakeOverlay) closeIntake(); });
+
+    // ── MENTORIA FORM MODAL ──
+    const mentoriaOverlay = document.getElementById('mentoria-overlay');
+
+    function openMentoriaForm() {
+      mentoriaOverlay.querySelectorAll('input, textarea').forEach(el => el.value = '');
+      document.getElementById('mf-error').classList.remove('visible');
+      mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('mf-step-1').classList.add('active');
+      mentoriaOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMentoriaForm() {
+      mentoriaOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function val(id) { return (document.getElementById(id)?.value || '').trim() || 'não informado'; }
+
+    async function submitMentoriaForm() {
+      const name  = document.getElementById('mf-name').value.trim();
+      const email = document.getElementById('mf-email').value.trim();
+      if (!name || !email) {
+        document.getElementById('mf-error').classList.add('visible');
+        return;
+      }
+      document.getElementById('mf-error').classList.remove('visible');
+
+      mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('mf-step-sending').classList.add('active');
+
+      try {
+        await fetch('https://formsubmit.co/ajax/bymayatoledo@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Nova inscrição Mentoria: ' + name,
+            _cc: 'testlexiscale@gmail.com',
+            _replyto: email,
+            nome: name,
+            email: email,
+            whatsapp: val('mf-phone')
+          })
+        });
+      } catch(e) { console.error("Form submission error:", e); }
+
+      closeMentoriaForm();
+      window.location.href = 'https://buy.stripe.com/5kQ3cwa1w2r34zw14BgQE00';
+    }
+
+    document.getElementById('mentoria-close').addEventListener('click', closeMentoriaForm);
+    mentoriaOverlay.addEventListener('click', e => { if (e.target === mentoriaOverlay) closeMentoriaForm(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMentoriaForm(); closeIntake(); } });
+
+    // ── STICKY NAV ──
+    // Sticky nav
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Trigger visible immediately for elements already in view
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!--
+  ARQUIVO: Formulário completo de mentoria (8 passos)
+  Salvo em: 02/07/2026
+  Para reativar: substituir o conteúdo do #mentoria-overlay no index.html
+-->
+
+<!-- MODAL HTML -->
+<div id="mentoria-overlay">
+  <div class="mentoria-modal">
+    <button class="intake-close" id="mentoria-close" aria-label="Fechar">&times;</button>
+
+    <!-- Progress bars: 7 question steps -->
+    <div class="intake-progress mf-progress" aria-hidden="true">
+      <div class="intake-progress-bar" id="mbar-0"></div>
+      <div class="intake-progress-bar" id="mbar-1"></div>
+      <div class="intake-progress-bar" id="mbar-2"></div>
+      <div class="intake-progress-bar" id="mbar-3"></div>
+      <div class="intake-progress-bar" id="mbar-4"></div>
+      <div class="intake-progress-bar" id="mbar-5"></div>
+      <div class="intake-progress-bar" id="mbar-6"></div>
+    </div>
+
+    <!-- Step 1: Contact -->
+    <div id="mf-step-1" class="mentoria-step active">
+      <span class="intake-eyebrow">Início da sua jornada de estilo</span>
+      <h2 class="intake-heading">Vamos começar</h2>
+      <p class="intake-sub">Preencha seus dados para que a Mayara possa te contactar após o agendamento.</p>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-name">Nome completo *</label>
+        <input type="text" id="mf-name" class="intake-input" placeholder="Seu nome" autocomplete="name">
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-email">E-mail *</label>
+        <input type="email" id="mf-email" class="intake-input" placeholder="seu@email.com" autocomplete="email">
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-phone">WhatsApp (opcional)</label>
+        <input type="tel" id="mf-phone" class="intake-input" placeholder="+44 ou +55..." autocomplete="tel">
+      </div>
+      <p class="intake-error" id="mf-error">Por favor, preencha nome e e-mail antes de continuar.</p>
+      <div class="intake-nav" style="justify-content:flex-end;">
+        <button class="btn-primary" onclick="goMentoriaStep(2)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: q1 + q2 -->
+    <div id="mf-step-2" class="mentoria-step">
+      <span class="intake-eyebrow">1 de 7 · Sobre você hoje</span>
+      <h2 class="intake-heading">Como você se sente com sua imagem?</h2>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q1">Como você se sente com sua imagem hoje?</label>
+        <textarea id="mf-q1" class="intake-input mf-textarea" placeholder="Descreva como está sua relação com a sua imagem agora..."></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q2">O que mais te incomoda ao se olhar no espelho?</label>
+        <textarea id="mf-q2" class="intake-input mf-textarea" placeholder="Seja honesta, este é um espaço seguro..."></textarea>
+      </div>
+      <div class="intake-nav">
+        <button class="intake-back" onclick="goMentoriaStep(1)">← Voltar</button>
+        <button class="btn-primary" onclick="goMentoriaStep(3)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: q3 + q4 -->
+    <div id="mf-step-3" class="mentoria-step">
+      <span class="intake-eyebrow">2 de 7 · Sobre você hoje</span>
+      <h2 class="intake-heading">A sua relação com a roupa</h2>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q3">Quando foi a última vez que você se sentiu bem vestida?</label>
+        <textarea id="mf-q3" class="intake-input mf-textarea" placeholder="Pode ser uma situação, um período da vida..."></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q4">Você sente que tem muitas roupas, mas nada para vestir?</label>
+        <textarea id="mf-q4" class="intake-input mf-textarea" placeholder="Como é essa sensação no seu dia a dia?"></textarea>
+      </div>
+      <div class="intake-nav">
+        <button class="intake-back" onclick="goMentoriaStep(2)">← Voltar</button>
+        <button class="btn-primary" onclick="goMentoriaStep(4)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: q5 + q6 -->
+    <div id="mf-step-4" class="mentoria-step">
+      <span class="intake-eyebrow">3 de 7 · Sua relação com as roupas</span>
+      <h2 class="intake-heading">O seu guarda-roupa te representa?</h2>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q5">O que te leva a decidir uma compra?</label>
+        <textarea id="mf-q5" class="intake-input mf-textarea" placeholder="Impulso, promoção, necessidade, influência..."></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q6">Em que momento da sua vida você sentiu que se perdeu de si mesma?</label>
+        <textarea id="mf-q6" class="intake-input mf-textarea" placeholder="Maternidade, relacionamento, rotina, identidade..."></textarea>
+      </div>
+      <div class="intake-nav">
+        <button class="intake-back" onclick="goMentoriaStep(3)">← Voltar</button>
+        <button class="btn-primary" onclick="goMentoriaStep(5)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Step 5: q7 + q8 -->
+    <div id="mf-step-5" class="mentoria-step">
+      <span class="intake-eyebrow">4 de 7 · O que você sente</span>
+      <h2 class="intake-heading">Como você quer se sentir?</h2>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q7">Sua imagem representa quem você é hoje?</label>
+        <textarea id="mf-q7" class="intake-input mf-textarea" placeholder="O que sente quando se olha e pensa em quem você se tornou?"></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q8">Como você gostaria de se sentir ao se vestir?</label>
+        <textarea id="mf-q8" class="intake-input mf-textarea" placeholder="Confiante, leve, elegante, autêntica..."></textarea>
+      </div>
+      <div class="intake-nav">
+        <button class="intake-back" onclick="goMentoriaStep(4)">← Voltar</button>
+        <button class="btn-primary" onclick="goMentoriaStep(6)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Step 6: q9 + q10 -->
+    <div id="mf-step-6" class="mentoria-step">
+      <span class="intake-eyebrow">5 de 7 · O que você deseja</span>
+      <h2 class="intake-heading">A imagem que você quer transmitir</h2>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q9">Que imagem você gostaria de transmitir para o mundo?</label>
+        <textarea id="mf-q9" class="intake-input mf-textarea" placeholder="Profissional, acolhedora, criativa, sofisticada..."></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q10">Como é a sua vida na prática hoje? (trabalho, rotina, filhos...)</label>
+        <textarea id="mf-q10" class="intake-input mf-textarea" placeholder="Ajuda a entender o que funciona para a sua realidade..."></textarea>
+      </div>
+      <div class="intake-nav">
+        <button class="intake-back" onclick="goMentoriaStep(5)">← Voltar</button>
+        <button class="btn-primary" onclick="goMentoriaStep(7)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Step 7: q11 + q12 -->
+    <div id="mf-step-7" class="mentoria-step">
+      <span class="intake-eyebrow">6 de 7 · Referências e guarda-roupa</span>
+      <h2 class="intake-heading">O que te inspira?</h2>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q11">Quais mulheres te inspiram visualmente? O que admira nelas?</label>
+        <textarea id="mf-q11" class="intake-input mf-textarea" placeholder="Podem ser celebridades, amigas, personagens..."></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q12">Quais peças você mais usa? E quais evita? Por quê?</label>
+        <textarea id="mf-q12" class="intake-input mf-textarea" placeholder="Pense no que fica no fundo do armário e por quê..."></textarea>
+      </div>
+      <div class="intake-nav">
+        <button class="intake-back" onclick="goMentoriaStep(6)">← Voltar</button>
+        <button class="btn-primary" onclick="goMentoriaStep(8)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Step 8: q13 + q14 + q15 (final) -->
+    <div id="mf-step-8" class="mentoria-step">
+      <span class="intake-eyebrow">7 de 7 · Seu compromisso</span>
+      <h2 class="intake-heading">Quase lá...</h2>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q13">O que te fez perceber que precisa cuidar da sua imagem agora?</label>
+        <textarea id="mf-q13" class="intake-input mf-textarea" placeholder="Qual foi o gatilho ou momento que te trouxe até aqui?"></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q14">O que você espera transformar ao final da mentoria?</label>
+        <textarea id="mf-q14" class="intake-input mf-textarea" placeholder="Seja específica: o que muda na sua vida?"></textarea>
+      </div>
+      <div class="intake-field">
+        <label class="intake-label" for="mf-q15">Tem algo mais que você sente que a Mayara precisa saber?</label>
+        <textarea id="mf-q15" class="intake-input mf-textarea" placeholder="Este é o seu espaço livre..."></textarea>
+      </div>
+      <div class="intake-nav">
+        <button class="intake-back" onclick="goMentoriaStep(7)">← Voltar</button>
+        <button class="btn-primary" onclick="submitMentoriaForm()">Enviar e agendar →</button>
+      </div>
+    </div>
+
+    <!-- Sending -->
+    <div id="mf-step-sending" class="mentoria-step" style="text-align:center;padding:4rem 1rem;">
+      <div style="font-family:'Safira March',serif;font-size:2.5rem;color:var(--gold);margin-bottom:1.2rem;">✦</div>
+      <p class="intake-heading" style="font-size:1.4rem;">A enviar...</p>
+      <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">Aguarda um momento.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- JS (updateMBars + goMentoriaStep + submitMentoriaForm) -->
+<script>
+  function updateMBars(step) {
+    [0,1,2,3,4,5,6].forEach(i => {
+      document.getElementById('mbar-' + i).classList.toggle('filled', step > i);
+    });
+  }
+
+  function goMentoriaStep(n) {
+    if (n === 2) {
+      const name  = document.getElementById('mf-name').value.trim();
+      const email = document.getElementById('mf-email').value.trim();
+      if (!name || !email) {
+        document.getElementById('mf-error').classList.add('visible');
+        return;
+      }
+      document.getElementById('mf-error').classList.remove('visible');
+    }
+    mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('mf-step-' + n).classList.add('active');
+    updateMBars(n - 1);
+    mentoriaOverlay.querySelector('.mentoria-modal').scrollTop = 0;
+  }
+
+  async function submitMentoriaForm() {
+    mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('mf-step-sending').classList.add('active');
+
+    const name  = val('mf-name');
+    const email = document.getElementById('mf-email').value.trim();
+
+    try {
+      await fetch('https://formsubmit.co/ajax/bymayatoledo@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Nova inscrição Mentoria: ' + name,
+          _cc: 'testlexiscale@gmail.com',
+          _replyto: email,
+          nome: name,
+          email: email,
+          whatsapp: val('mf-phone'),
+          '1_imagem_hoje': val('mf-q1'),
+          '1_espelho': val('mf-q2'),
+          '1_bem_vestida': val('mf-q3'),
+          '2_roupas_nada_vestir': val('mf-q4'),
+          '2_decisao_compra': val('mf-q5'),
+          '3_quando_se_perdeu': val('mf-q6'),
+          '3_imagem_representa': val('mf-q7'),
+          '4_sentir_ao_vestir': val('mf-q8'),
+          '4_imagem_a_transmitir': val('mf-q9'),
+          '4_vida_real': val('mf-q10'),
+          '6_referencias': val('mf-q11'),
+          '7_pecas_usa_evita': val('mf-q12'),
+          '8_gatilho': val('mf-q13'),
+          '8_transformacao': val('mf-q14'),
+          '8_algo_mais': val('mf-q15')
+        })
+      });
+    } catch(e) { console.error("Form submission error:", e); }
+
+    closeMentoriaForm();
+    window.location.href = 'https://buy.stripe.com/5kQ3cwa1w2r34zw14BgQE00';
+  }
+</script>
