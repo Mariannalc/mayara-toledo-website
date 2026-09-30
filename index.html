@@ -2542,7 +2542,18 @@
       <div id="mf-step-sending" class="mentoria-step" style="text-align:center;padding:4rem 1rem;">
         <div style="font-family:'Safira March',serif;font-size:2.5rem;color:var(--gold);margin-bottom:1.2rem;">✦</div>
         <p class="intake-heading" style="font-size:1.4rem;">A processar...</p>
-        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">A redirecionar para o pagamento.</p>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">Um momento…</p>
+      </div>
+
+      <!-- Currency choice -->
+      <div id="mf-step-pay" class="mentoria-step" style="text-align:center;padding:3rem 1.5rem;">
+        <span class="intake-eyebrow">Último passo</span>
+        <h2 class="intake-heading" style="font-size:1.4rem;">Escolha como pagar</h2>
+        <p class="intake-sub">Pagamento seguro via Stripe.</p>
+        <div style="display:flex;flex-direction:column;gap:0.8rem;max-width:320px;margin:1.5rem auto 0;">
+          <a class="btn-primary" href="https://buy.stripe.com/14AaEYc9Ec1D8PM4gNgQE02" style="text-align:center;">Pagar £95 · Reino Unido</a>
+          <a class="btn-primary" href="https://buy.stripe.com/aFa3cwa1wd5H7LIcNjgQE03" style="text-align:center;">Pagar R$647 · Brasil</a>
+        </div>
       </div>
 
     </div>
@@ -2744,8 +2755,9 @@
         });
       } catch(e) { console.error("Form submission error:", e); }
 
-      closeMentoriaForm();
-      window.location.href = 'https://buy.stripe.com/5kQ3cwa1w2r34zw14BgQE00';
+      mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('mf-step-pay').classList.add('active');
+      mentoriaSubmitting = false;
     }
 
     document.getElementById('mentoria-close').addEventListener('click', closeMentoriaForm);
@@ -2823,6 +2835,8 @@
           btn.setAttribute('onclick', 'openWaitlistForm()');
           const map = {
             'Reservar minha vaga →': 'Entrar na lista de espera →',
+            'Garantir minha vaga': 'Entrar na lista de espera',
+            'Garantir minha vaga →': 'Entrar na lista de espera →',
             'Quero participar': 'Entrar na lista de espera',
             'Quero!': 'Entrar na lista de espera',
             'Reservar Vaga': 'Lista de espera',
