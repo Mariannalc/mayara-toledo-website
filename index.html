@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="mayara-hero-new4-opt.jpg">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src https://formsubmit.co; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; frame-ancestors 'none';">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -423,12 +423,12 @@
     }
     .servicos-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1px;
       background: var(--line);
       border: 1px solid var(--line);
       width: 100%;
-      max-width: 1100px;
+      max-width: 760px;
       margin-top: 2rem;
     }
     .servico-card {
@@ -493,6 +493,17 @@
       align-self: flex-start;
     }
     .servico-cta:hover { opacity: 0.55; }
+    .servico-announcement {
+      background: rgba(198,166,100,0.08);
+      border: 1px solid rgba(198,166,100,0.25);
+      border-radius: 3px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--burgundy);
+      margin-top: 0.2rem;
+    }
 
     /* ── SOBRE / STORY ── */
     .story {
@@ -1213,6 +1224,23 @@
     .intake-overlay.open .intake-modal { transform: translateY(0); }
 
     /* ── Mentoria form modal ── */
+    #waitlist-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,15,13,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #waitlist-overlay.open { opacity: 1; pointer-events: all; }
+    #waitlist-overlay.open .mentoria-modal { transform: translateY(0); }
+
     #mentoria-overlay {
       position: fixed;
       inset: 0;
@@ -2058,20 +2086,6 @@
         "Foi dessa percepção que nasceu o <strong style="font-style:normal;font-weight:600;color:var(--burgundy);">Elegância Sem Frescura</strong>, um método para mulheres que querem construir uma imagem sofisticada e autêntica, sem excessos e sem regras rígidas. Porque quando a sua imagem está alinhada com quem você é, tudo ao seu redor começa a responder diferente."
       </blockquote>
 
-      <div class="quem-creds reveal reveal-delay-3">
-        <div class="quem-cred-item">
-          <span class="quem-cred-label">Formação</span>
-          <span class="quem-cred-value">Renata Meins · CHIC</span>
-        </div>
-        <div class="quem-cred-item">
-          <span class="quem-cred-label">Especialização</span>
-          <span class="quem-cred-value">Clelia Midori · Conceito Mid</span>
-        </div>
-        <div class="quem-cred-item">
-          <span class="quem-cred-label">Especialização</span>
-          <span class="quem-cred-value">Kibbe Body Types</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2086,22 +2100,14 @@
     <div class="servicos-grid">
 
       <div class="servico-card reveal">
-        <span class="servico-tag">Mentoria em grupo</span>
+        <span class="servico-tag">Mentoria em grupo · Em breve</span>
         <h3 class="servico-title">Elegância sem Frescura</h3>
-        <p class="servico-desc">4 encontros online e ao vivo pelo Google Meet. Um método para construir uma imagem coerente com quem você é, sem seguir tendências cegas. Turma pequena para acompanhamento próximo. Material de apoio + suporte no WhatsApp incluídos.</p>
-        <span class="servico-price">R$ 547 · £ 79</span>
-        <button class="servico-cta" onclick="openMentoriaForm()">Reservar minha vaga →</button>
+        <p class="servico-desc">Segunda turma a caminho. 4 encontros online e ao vivo pelo Google Meet para construir uma imagem coerente com quem você é, sem seguir tendências cegas. Registre seu interesse e receba as informações em primeira mão.</p>
+        <p id="mentoria-announcement" class="servico-announcement">Em breve: Segunda turma do Elegância sem Frescura</p>
+        <button class="servico-cta" onclick="openWaitlistForm()">Registrar interesse →</button>
       </div>
 
-      <div class="servico-card reveal reveal-delay-1">
-        <span class="servico-tag">Curadoria mensal</span>
-        <h3 class="servico-title">Catálogo do Reino Unido</h3>
-        <p class="servico-desc">Assine e receba mensalmente uma seleção curada das melhores peças de Marks &amp; Spencer, Next, Zara UK, &amp;Other Stories e River Island, filtrada pelo estilo britânico atemporal que funciona para a mulher que vive fora do Brasil, sem perder a identidade.</p>
-        <span class="servico-price">Assinatura mensal · sob consulta</span>
-        <a href="https://wa.me/447300462457" class="servico-cta" target="_blank" rel="noopener">Saber mais →</a>
-      </div>
-
-      <div class="servico-card reveal reveal-delay-2">
+<div class="servico-card reveal reveal-delay-2">
         <span class="servico-tag">Consultoria 1:1</span>
         <h3 class="servico-title">Consultoria Individual</h3>
         <p class="servico-desc">Um encontro personalizado e exclusivo para análise do seu guarda-roupa, mapeamento do seu perfil de estilo e criação de um plano de ação concreto. Para quem quer resultado com atenção individual e dedicada.</p>
@@ -2120,7 +2126,7 @@
       <h2 class="mi-title reveal reveal-delay-1">
         Elegância<br><em>sem Frescura</em>
       </h2>
-      <p class="section-sub reveal reveal-delay-1" style="color:rgba(240,232,220,0.55);margin-bottom:0.5rem;">4 encontros online e ao vivo · Turma Fundadora</p>
+      <p class="section-sub reveal reveal-delay-1" style="color:rgba(240,232,220,0.55);margin-bottom:0.5rem;">Em breve: segunda turma</p>
       <div class="hero-divider reveal reveal-delay-1" style="margin:1.2rem 0;"></div>
       <blockquote class="mi-quote reveal reveal-delay-2">
         "Existe uma diferença entre parecer bem-vestida<br>e sentir-se inteira.<br>
@@ -2129,8 +2135,8 @@
       <p class="mi-body reveal reveal-delay-2">
         Não é um curso sobre tendências. É um método de quatro encontros online e ao vivo para que você construa uma imagem coerente com quem você se tornou, com clareza, intenção e elegância real.
       </p>
-      <button class="btn-gold" onclick="openMentoriaForm()" style="margin-top:auto;">
-        Quero participar
+      <button class="btn-gold" onclick="openWaitlistForm()" style="margin-top:auto;">
+        Registrar meu interesse
       </button>
     </div>
 
@@ -2138,7 +2144,7 @@
       <div class="prog-meta reveal">
         <div class="mi-meta-item" style="margin-bottom:0.7rem;">
           <svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <div class="mi-meta-text"><strong>Turma Fundadora</strong>11 Jul · 18 Jul · 25 Jul · 01 Ago</div>
+          <div class="mi-meta-text"><strong>Segunda Turma</strong>Datas a confirmar · Em breve</div>
         </div>
         <div class="mi-meta-item" style="margin-bottom:0.7rem;">
           <svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -2197,9 +2203,9 @@
   <!-- MENTORIA: OFERTA E PREÇO -->
   <section class="investimento">
     <span class="section-label reveal">Investimento</span>
-    <h2 class="section-title reveal reveal-delay-1">Turma Fundadora</h2>
+    <h2 class="section-title reveal reveal-delay-1">Em breve: segunda turma</h2>
     <p class="section-sub reveal reveal-delay-2">
-      Vagas limitadas para que Mayara possa acompanhar cada aluna de perto.
+      Registre seu interesse para receber as informações da próxima turma em primeira mão.
     </p>
     <div class="section-divider reveal reveal-delay-2"></div>
     <div class="preco-wrapper reveal reveal-delay-3">
@@ -2221,8 +2227,8 @@
       <li><span class="mark"></span> Material de apoio exclusivo</li>
       <li><span class="mark"></span> Acesso direto à Mayara durante o programa</li>
     </ul>
-    <button class="btn-primary reveal reveal-delay-4" onclick="openMentoriaForm()" style="display:block;max-width:280px;text-align:center;margin:0 auto;border:none;cursor:pointer;">
-      Quero!
+    <button class="btn-primary reveal reveal-delay-4" onclick="openWaitlistForm()" style="display:block;max-width:320px;text-align:center;margin:0 auto;border:none;cursor:pointer;">
+      Registrar meu interesse
     </button>
   </section>
 
@@ -2334,7 +2340,7 @@
           Agendar conversa
         </button>
         <a href="https://www.instagram.com/bymayaratoledo/" class="btn-outline" target="_blank" rel="noopener">
-          Ver no Instagram
+          Conheça mais do meu trabalho
         </a>
       </div>
     </div>
@@ -2347,7 +2353,7 @@
       <li><a href="https://www.instagram.com/bymayaratoledo/" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="https://wa.me/447300462457" target="_blank" rel="noopener">WhatsApp</a></li>
       <li><a href="https://cal.com/mayaratoledo/primeira-reuniao" target="_blank" rel="noopener">Agendar Conversa</a></li>
-      <li><a href="#mentoria" onclick="setTimeout(openMentoriaForm,400)">Reservar Vaga</a></li>
+      <li><a href="#mentoria" onclick="setTimeout(openWaitlistForm,400)">Registrar Interesse</a></li>
     </ul>
     <span class="footer-copy">© 2026 Mayara Toledo · Elegância sem Frescura</span>
     <span class="footer-powered">empowered by <a href="https://lexiscale.ai" target="_blank" rel="noopener">lexiscale</a></span>
@@ -2531,6 +2537,39 @@
     </div>
   </div>
 
+  <!-- WAITLIST MODAL -->
+  <div id="waitlist-overlay" role="dialog" aria-modal="true" aria-label="Lista de espera">
+    <div class="mentoria-modal">
+      <button class="intake-close" id="waitlist-close" aria-label="Fechar">&times;</button>
+      <div id="wl-step-1" class="mentoria-step active">
+        <span class="intake-eyebrow">Mentoria em grupo</span>
+        <h2 class="intake-heading">Lista de espera</h2>
+        <p class="intake-sub">As vagas estão encerradas por agora. Deixe o seu e-mail e será a primeira a saber quando abrirmos de novo.</p>
+        <div class="intake-field">
+          <label class="intake-label" for="wl-name">Nome completo *</label>
+          <input type="text" id="wl-name" class="intake-input" placeholder="Seu nome" autocomplete="name">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="wl-email">E-mail *</label>
+          <input type="email" id="wl-email" class="intake-input" placeholder="seu@email.com" autocomplete="email">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="wl-phone">WhatsApp (opcional)</label>
+          <input type="tel" id="wl-phone" class="intake-input" placeholder="+44 ou +55..." autocomplete="tel">
+        </div>
+        <p class="intake-error" id="wl-error">Por favor, preencha nome e e-mail antes de continuar.</p>
+        <div class="intake-nav" style="justify-content:flex-end;">
+          <button class="btn-primary" onclick="submitWaitlistForm()">Entrar na lista →</button>
+        </div>
+      </div>
+      <div id="wl-step-done" class="mentoria-step" style="text-align:center;padding:4rem 1rem;">
+        <div style="font-family:'Safira March',serif;font-size:2.5rem;color:var(--gold);margin-bottom:1.2rem;">✦</div>
+        <p class="intake-heading" style="font-size:1.4rem;">Você está na lista!</p>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">Assim que as vagas abrirem, você será a primeira a saber.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ── INTAKE MODAL ──
     const intakeOverlay = document.getElementById('intake-overlay');
@@ -2566,7 +2605,9 @@
       });
     }
 
+    let intakeSubmitting = false;
     async function finishIntake() {
+      if (intakeSubmitting) return;
       const name  = document.getElementById('contact-name').value.trim();
       const email = document.getElementById('contact-email').value.trim();
       const phone = document.getElementById('contact-phone').value.trim();
@@ -2576,6 +2617,7 @@
         errEl.classList.add('visible');
         return;
       }
+      intakeSubmitting = true;
       errEl.classList.remove('visible');
 
       const q1 = document.querySelector('input[name="q1"]:checked')?.value || '';
@@ -2656,11 +2698,14 @@
     function closeMentoriaForm() {
       mentoriaOverlay.classList.remove('open');
       document.body.style.overflow = '';
+      mentoriaSubmitting = false;
     }
 
     function val(id) { return (document.getElementById(id)?.value || '').trim() || 'não informado'; }
 
+    let mentoriaSubmitting = false;
     async function submitMentoriaForm() {
+      if (mentoriaSubmitting) return;
       const name  = document.getElementById('mf-name').value.trim();
       const email = document.getElementById('mf-email').value.trim();
       if (!name || !email) {
@@ -2668,6 +2713,7 @@
         return;
       }
       document.getElementById('mf-error').classList.remove('visible');
+      mentoriaSubmitting = true;
 
       mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
       document.getElementById('mf-step-sending').classList.add('active');
@@ -2693,7 +2739,92 @@
 
     document.getElementById('mentoria-close').addEventListener('click', closeMentoriaForm);
     mentoriaOverlay.addEventListener('click', e => { if (e.target === mentoriaOverlay) closeMentoriaForm(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMentoriaForm(); closeIntake(); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMentoriaForm(); closeIntake(); closeWaitlistForm(); } });
+
+    // ── WAITLIST MODAL ──
+    const waitlistOverlay = document.getElementById('waitlist-overlay');
+
+    function openWaitlistForm() {
+      waitlistOverlay.querySelectorAll('input').forEach(el => el.value = '');
+      document.getElementById('wl-error').classList.remove('visible');
+      waitlistOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('wl-step-1').classList.add('active');
+      waitlistOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeWaitlistForm() {
+      waitlistOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    let waitlistSubmitting = false;
+    async function submitWaitlistForm() {
+      if (waitlistSubmitting) return;
+      const name  = document.getElementById('wl-name').value.trim();
+      const email = document.getElementById('wl-email').value.trim();
+      if (!name || !email) {
+        document.getElementById('wl-error').classList.add('visible');
+        return;
+      }
+      document.getElementById('wl-error').classList.remove('visible');
+      waitlistSubmitting = true;
+      try {
+        await fetch('https://formsubmit.co/ajax/bymayatoledo@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Lista de espera Mentoria: ' + name,
+            _replyto: email,
+            nome: name,
+            email: email,
+            whatsapp: (document.getElementById('wl-phone').value || '').trim() || 'não informado'
+          })
+        });
+      } catch(e) { console.error('Waitlist submission error:', e); }
+      waitlistSubmitting = false;
+      waitlistOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('wl-step-done').classList.add('active');
+    }
+
+    document.getElementById('waitlist-close').addEventListener('click', closeWaitlistForm);
+    waitlistOverlay.addEventListener('click', e => { if (e.target === waitlistOverlay) closeWaitlistForm(); });
+
+    // ── LAUNCH WINDOW: switch to waitlist mode if needed ──
+    (async function() {
+      try {
+        const res = await fetch('/api/settings');
+        if (!res.ok) return;
+        const data = await res.json();
+        const { mode, mentoria_text } = data;
+
+        // Update announcement box from admin (null = keep default; '' = hide)
+        const ann = document.getElementById('mentoria-announcement');
+        if (ann && mentoria_text !== null) {
+          if (mentoria_text === '') ann.style.display = 'none';
+          else ann.textContent = mentoria_text;
+        }
+
+        if (mode !== 'WAITLIST') return;
+
+        // Swap all mentoria CTA buttons to waitlist
+        document.querySelectorAll('[onclick="openMentoriaForm()"]').forEach(btn => {
+          btn.setAttribute('onclick', 'openWaitlistForm()');
+          const map = {
+            'Reservar minha vaga →': 'Entrar na lista de espera →',
+            'Quero participar': 'Entrar na lista de espera',
+            'Quero!': 'Entrar na lista de espera',
+            'Reservar Vaga': 'Lista de espera',
+          };
+          const cur = btn.textContent.trim();
+          if (map[cur]) btn.textContent = map[cur];
+        });
+        // Footer link
+        document.querySelectorAll('[onclick*="openMentoriaForm"]').forEach(el => {
+          el.setAttribute('onclick', el.getAttribute('onclick').replace('openMentoriaForm', 'openWaitlistForm'));
+        });
+      } catch { /* fail silently — don't break the page */ }
+    })();
 
     // ── STICKY NAV ──
     // Sticky nav

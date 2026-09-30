@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin · Mayara Toledo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f6efe7;
+      --gold:  #c6a664;
+      --dark:  #1a0f0d;
+      --muted: #6B5F55;
+      --line:  rgba(246,239,231,0.12);
+      --error: #c0392b;
+    }
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .card {
+      background: rgba(246,239,231,0.04);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 400px;
+    }
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.8rem;
+      color: var(--cream);
+      margin-bottom: 2rem;
+    }
+    .field { margin-bottom: 1.2rem; }
+    label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    textarea {
+      width: 100%;
+      background: rgba(246,239,231,0.06);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 0.7rem 0.9rem;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+      min-height: 4.5rem;
+    }
+    textarea:focus { border-color: var(--gold); }
+    input[type="email"],
+    input[type="password"],
+    input[type="datetime-local"] {
+      width: 100%;
+      background: rgba(246,239,231,0.06);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 0.7rem 0.9rem;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: var(--gold); }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.7);
+      cursor: pointer;
+    }
+    .btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 3px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-gold  { background: var(--gold); color: var(--dark); font-weight: 500; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); margin-top: 0.8rem; }
+    .btn-danger { background: transparent; color: #c0392b; border: 1px solid rgba(192,57,43,0.3); margin-top: 0.5rem; }
+    .error-msg {
+      color: var(--error);
+      font-size: 0.82rem;
+      margin-top: 0.8rem;
+      display: none;
+    }
+    .error-msg.visible { display: block; }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      border-radius: 2rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    .badge-open       { background: rgba(39,174,96,0.15); color: #27ae60; border: 1px solid rgba(39,174,96,0.3); }
+    .badge-waitlist   { background: rgba(198,166,100,0.15); color: var(--gold); border: 1px solid rgba(198,166,100,0.3); }
+    .badge-always-open { background: rgba(246,239,231,0.08); color: var(--cream); border: 1px solid var(--line); }
+    .divider { border: none; border-top: 1px solid var(--line); margin: 1.5rem 0; }
+    .hint { font-size: 0.75rem; color: var(--muted); margin-top: 0.35rem; }
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .field-pw { position: relative; }
+    .field-pw input { padding-right: 2.8rem; }
+    .pw-toggle {
+      position: absolute;
+      right: 0.7rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 0;
+      line-height: 1;
+      font-size: 1rem;
+    }
+    .pw-toggle:hover { color: var(--cream); }
+    .toggle-group {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .toggle-btn {
+      flex: 1;
+      padding: 0.55rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .toggle-btn:hover { color: var(--cream); border-color: rgba(246,239,231,0.3); }
+    .toggle-btn.active-auto   { background: rgba(246,239,231,0.08); color: var(--cream); border-color: rgba(246,239,231,0.4); }
+    .toggle-btn.active-open   { background: rgba(39,174,96,0.15); color: #27ae60; border-color: rgba(39,174,96,0.4); }
+    .toggle-btn.active-closed { background: rgba(198,166,100,0.15); color: var(--gold); border-color: rgba(198,166,100,0.4); }
+    .schedule-fields { transition: opacity 0.2s; }
+    .schedule-fields.disabled { opacity: 0.35; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- LOGIN SCREEN -->
+    <div id="screen-login" class="screen active">
+      <p class="eyebrow">Mayara Toledo</p>
+      <h1>Admin</h1>
+      <div class="field">
+        <label for="l-email">E-mail</label>
+        <input type="email" id="l-email" autocomplete="username" placeholder="admin@email.com">
+      </div>
+      <div class="field field-pw">
+        <label for="l-password">Password</label>
+        <input type="password" id="l-password" autocomplete="current-password" placeholder="••••••••">
+        <button type="button" class="pw-toggle" onclick="togglePw()" aria-label="Show password" id="pw-toggle-btn">
+          <!-- eye-open -->
+          <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <!-- eye-off -->
+          <svg id="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+        </button>
+      </div>
+      <p class="error-msg" id="l-error">Invalid credentials. Try again.</p>
+      <button class="btn btn-gold" onclick="doLogin()">Sign in</button>
+    </div>
+
+    <!-- SETTINGS SCREEN -->
+    <div id="screen-settings" class="screen">
+      <p class="eyebrow">Launch Window</p>
+      <h1>Settings</h1>
+
+      <div class="toggle-group">
+        <button class="toggle-btn active-auto" id="tb-auto"   onclick="setForced(null)">Auto</button>
+        <button class="toggle-btn"             id="tb-open"   onclick="setForced('OPEN')">Open</button>
+        <button class="toggle-btn"             id="tb-closed" onclick="setForced('CLOSED')">Closed</button>
+      </div>
+
+      <div class="schedule-fields" id="schedule-fields">
+        <div class="field">
+          <label for="s-open">Opens at (London time)</label>
+          <input type="datetime-local" id="s-open">
+          <p class="hint">Leave blank to open immediately.</p>
+        </div>
+        <div class="field">
+          <label for="s-close">Closes at (London time)</label>
+          <input type="datetime-local" id="s-close">
+          <p class="hint">Leave blank to stay open indefinitely.</p>
+        </div>
+      </div>
+
+      <hr class="divider" style="margin-top:0;">
+      <div class="field">
+        <label for="s-mentoria-text">Texto do anúncio (caixa na página)</label>
+        <textarea id="s-mentoria-text" rows="3" placeholder="Em breve: Segunda turma do Elegância sem Frescura"></textarea>
+        <p class="hint">Aparece como caixa no card da mentoria. Deixe em branco para esconder.</p>
+      </div>
+
+      <p class="error-msg" id="s-error">Failed to save. Try again.</p>
+
+      <button class="btn btn-gold" id="s-save-btn" onclick="doSave()">Save</button>
+      <hr class="divider">
+      <button class="btn btn-danger" onclick="doLogout()">Sign out</button>
+    </div>
+
+  </div>
+
+  <script>
+    let currentForced = null; // null | 'OPEN' | 'CLOSED'
+
+    function setForced(val) {
+      currentForced = val;
+      document.getElementById('tb-auto').className   = 'toggle-btn' + (val === null   ? ' active-auto'   : '');
+      document.getElementById('tb-open').className   = 'toggle-btn' + (val === 'OPEN'  ? ' active-open'   : '');
+      document.getElementById('tb-closed').className = 'toggle-btn' + (val === 'CLOSED'? ' active-closed' : '');
+      document.getElementById('schedule-fields').classList.toggle('disabled', val !== null);
+    }
+
+    function togglePw() {
+      const input = document.getElementById('l-password');
+      const isHidden = input.type === 'password';
+      input.type = isHidden ? 'text' : 'password';
+      document.getElementById('icon-eye').style.display     = isHidden ? 'none'  : '';
+      document.getElementById('icon-eye-off').style.display = isHidden ? ''      : 'none';
+      document.getElementById('pw-toggle-btn').setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    }
+
+    // ── helpers ──
+    function show(id)  { document.getElementById(id).classList.add('active'); }
+    function hide(id)  { document.getElementById(id).classList.remove('active'); }
+    function err(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg || el.textContent;
+      el.classList.add('visible');
+    }
+    function clearErr(id) { document.getElementById(id).classList.remove('visible'); }
+
+    // Convert UTC ISO → datetime-local value (browser local timezone = London for Mayara)
+    function toLocal(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      const pad = n => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+
+    // datetime-local string → UTC ISO (browser treats input as local timezone)
+    function fromLocal(val) {
+      return val ? new Date(val).toISOString() : null;
+    }
+
+    function setBadge(mode) {
+      const badge = document.getElementById('s-badge');
+      badge.className = 'badge';
+      if (mode === 'OPEN') {
+        badge.classList.add('badge-open');
+        badge.textContent = 'Open';
+      } else if (mode === 'WAITLIST') {
+        badge.classList.add('badge-waitlist');
+        badge.textContent = 'Waitlist';
+      } else {
+        badge.classList.add('badge-always-open');
+        badge.textContent = 'Always open';
+      }
+    }
+
+    // ── login ──
+    async function doLogin() {
+      clearErr('l-error');
+      const email = document.getElementById('l-email').value.trim();
+      const password = document.getElementById('l-password').value;
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+          credentials: 'same-origin'
+        });
+        if (!res.ok) { err('l-error', 'Invalid credentials. Try again.'); return; }
+        hide('screen-login');
+        show('screen-settings');
+        loadSettings();
+      } catch {
+        err('l-error', 'Network error. Try again.');
+      }
+    }
+
+    // ── settings ──
+    async function loadSettings() {
+      try {
+        const res = await fetch('/api/settings?t=' + Date.now());
+        const data = await res.json();
+        document.getElementById('s-open').value  = toLocal(data.open_at);
+        document.getElementById('s-close').value = toLocal(data.close_at);
+        document.getElementById('s-mentoria-text').value = data.mentoria_text || 'Em breve: Segunda turma do Elegância sem Frescura';
+        setForced(data.forced || null);
+        setBadge(data.mode);
+      } catch { /* non-blocking */ }
+    }
+
+    async function doSave() {
+      clearErr('s-error');
+      const btn = document.getElementById('s-save-btn');
+      const open_at  = fromLocal(document.getElementById('s-open').value);
+      const close_at = fromLocal(document.getElementById('s-close').value);
+      try {
+        btn.textContent = 'Saving…';
+        btn.disabled = true;
+        const res = await fetch('/api/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ open_at, close_at, forced: currentForced, mentoria_text: document.getElementById('s-mentoria-text').value.trim() || null }),
+          credentials: 'same-origin'
+        });
+        if (!res.ok) {
+          err('s-error', res.status === 401 ? 'Session expired. Please sign in again.' : 'Failed to save. Try again.');
+          btn.textContent = 'Save';
+          btn.disabled = false;
+          return;
+        }
+        const data = await res.json();
+        setBadge(data.mode);
+        btn.textContent = 'Saved ✓';
+        btn.style.background = '#27ae60';
+        setTimeout(() => { btn.textContent = 'Save'; btn.style.background = ''; btn.disabled = false; }, 2000);
+      } catch {
+        err('s-error', 'Network error. Try again.');
+        btn.textContent = 'Save';
+        btn.disabled = false;
+      }
+    }
+
+    async function doClear() {
+      clearErr('s-error');
+      document.getElementById('s-open').value  = '';
+      document.getElementById('s-close').value = '';
+      setForced(null);
+      try {
+        const res = await fetch('/api/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ open_at: null, close_at: null, forced: null }),
+          credentials: 'same-origin'
+        });
+        if (res.ok) { const data = await res.json(); setBadge(data.mode); }
+      } catch { /* non-blocking */ }
+    }
+
+    async function doLogout() {
+      await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' });
+      hide('screen-settings');
+      show('screen-login');
+      document.getElementById('l-password').value = '';
+    }
+
+    // Allow Enter key on login form
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && document.getElementById('screen-login').classList.contains('active')) {
+        doLogin();
+      }
+    });
+
+    // Check if already logged in on page load
+    fetch('/api/settings', { credentials: 'same-origin' }).then(res => {
+      if (res.ok) {
+        // Try a POST with no body to check auth — instead just load settings screen
+        // if session cookie exists (settings GET is public, so try a dummy POST)
+      }
+    });
+  </script>
+</body>
+</html>
