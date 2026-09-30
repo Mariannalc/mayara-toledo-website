@@ -369,8 +369,8 @@
         btn.textContent = 'Saved ✓';
         btn.style.background = '#27ae60';
         setTimeout(() => { btn.textContent = 'Save'; btn.style.background = ''; btn.disabled = false; }, 2000);
-      } catch {
-        err('s-error', 'Network error. Try again.');
+      } catch (e) {
+        err('s-error', 'Network error (' + ((e && e.message) || 'unknown') + '). Try again.');
         btn.textContent = 'Save';
         btn.disabled = false;
       }
