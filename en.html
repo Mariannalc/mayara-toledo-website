@@ -126,11 +126,17 @@
 
     /* ── Sections ── */
     section { padding: 6rem 5rem; }
-    .section-header { max-width: 640px; margin-bottom: 3rem; }
+    .section-header { max-width: 760px; margin-bottom: 4rem; }
     .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 400; color: var(--dark);
+      font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 400; color: var(--dark);
+      line-height: 1.12;
       margin: 0.6rem 0 0.8rem;
+    }
+    .section-header .section-title::after {
+      content: ''; display: block;
+      width: 64px; height: 2px; background: var(--champagne);
+      margin-top: 1.1rem;
     }
 
     /* About — arch crop with floating frame, photo bleeding out of the band */
@@ -290,12 +296,24 @@
       .nav-links { gap: 1.1rem; }
       .nav-links .nav-hide-mobile { display: none; }
       section { padding: 4rem 1.4rem; }
-      .hero { grid-template-columns: 1fr; min-height: unset; }
-      .hero-text { padding: 6.5rem 1.4rem 3rem; }
-      .hero-title { width: 100%; }
-      .hero-img { max-height: 70vh; overflow: hidden; }
-      .hero-img::after { inset: 1.2rem; }
+      /* Vogue-cover hero: full-bleed photo, cover lines over a bottom scrim */
+      .hero { display: block; position: relative; min-height: 100dvh; }
+      .hero-img { position: absolute; inset: 0; max-height: none; }
+      .hero-img img { height: 100%; }
+      .hero-img::after { display: none; }
       .hero-caption { display: none; }
+      .hero-text {
+        position: relative; z-index: 2;
+        min-height: 100dvh; justify-content: flex-end;
+        padding: 0 1.4rem 2.8rem; gap: 1rem;
+        background: linear-gradient(to top,
+          rgba(26,15,13,0.78) 0%, rgba(26,15,13,0.35) 42%, rgba(26,15,13,0) 68%);
+      }
+      .hero-text .eyebrow { color: var(--champagne); }
+      .hero-title { width: 100%; color: var(--offwhite); font-size: clamp(2.7rem, 11.5vw, 3.6rem); }
+      .hero-sub { color: rgba(250,246,240,0.88); }
+      .hero-ctas .btn-outline { border-color: rgba(250,246,240,0.75); color: var(--offwhite); }
+      .hero-ctas .btn-outline:hover { background: rgba(250,246,240,0.12); }
       .about, .service, .service.flip, .booking { grid-template-columns: 1fr; gap: 2.2rem; }
       .service.flip .service-img { order: -1; }
       .service + .service { margin-top: 5rem; }

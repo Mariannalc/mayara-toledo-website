@@ -190,7 +190,7 @@
       opacity: 0.55;
     }
     .hero-name {
-      font-size: 0.8125rem;
+      font-size: 0.62rem;
       font-weight: 500;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -198,11 +198,11 @@
       margin-bottom: 2.2rem;
     }
     .hero-tagline {
-      font-size: clamp(1rem, 1.2vw, 1.125rem);
+      font-size: clamp(0.82rem, 1.1vw, 0.95rem);
       font-weight: 300;
       line-height: 1.75;
-      color: rgba(240,232,220,0.78);
-      max-width: 400px;
+      color: rgba(240,232,220,0.68);
+      max-width: 340px;
       margin-bottom: 2.2rem;
     }
 
@@ -1040,16 +1040,8 @@
       margin: 0 auto 3rem;
       line-height: 1.8;
     }
-    .btn-stack { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-stack .btn-primary, .btn-stack .btn-outline { min-width: 230px; }
-    .link-quiet {
-      display: inline-block; margin-top: 1.4rem;
-      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold-text); text-decoration: none;
-      border-bottom: 1px solid rgba(198,166,100,0.5); padding-bottom: 0.2rem;
-      transition: border-color 0.25s ease, color 0.25s ease;
-    }
-    .link-quiet:hover { color: var(--burgundy); border-color: var(--burgundy); }
+    .btn-stack { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+    .btn-stack .btn-primary, .btn-stack .btn-outline { width: 320px; min-height: 52px; }
 
     /* ── FOOTER ── */
     footer {
@@ -1919,7 +1911,7 @@
         gap: 2rem;
       }
       .hero-title { font-size: clamp(2.6rem, 10vw, 4rem); }
-      .hero-tagline { font-size: 1.125rem; max-width: 100%; }
+      .hero-tagline { font-size: 0.9rem; max-width: 100%; }
       .btn-primary { min-height: 52px; font-size: 0.8125rem; }
 
       /* ── Quem sou eu: full-width content, no image ── */
@@ -2366,10 +2358,10 @@
         <button class="btn-outline" onclick="openIntake()">
           Agendar conversa
         </button>
+        <a href="https://www.instagram.com/bymayaratoledo/" class="btn-outline" target="_blank" rel="noopener">
+          Conheça mais do meu trabalho →
+        </a>
       </div>
-      <a href="https://www.instagram.com/bymayaratoledo/" class="link-quiet reveal reveal-delay-2" target="_blank" rel="noopener">
-        Conheça mais do meu trabalho →
-      </a>
     </div>
   </section>
 
