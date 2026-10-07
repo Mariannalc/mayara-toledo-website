@@ -178,42 +178,35 @@
     }
     .service.flip .ghost-num { left: auto; right: -2.4rem; }
 
-    /* ── Colour swatch fan — slow, chic ── */
-    .swatch-fan {
-      position: absolute; z-index: 3; bottom: -2.6rem; right: -1.2rem;
-      width: 150px; height: 110px; pointer-events: none;
+    /* ── Palette ribbon — bands breathe open under the mouse ── */
+    .palette-ribbon {
+      display: flex; height: 130px; cursor: crosshair;
     }
-    .swatch {
-      position: absolute; bottom: 0; left: 50%;
-      width: 34px; height: 92px; border-radius: 8px 8px 10px 10px;
-      border: 1px solid rgba(250,246,240,0.7);
-      box-shadow: 0 6px 18px rgba(26,15,13,0.18);
-      transform-origin: 50% 95%;
-      opacity: 0;
-      transform: translateX(-50%) rotate(0deg);
+    .palette-ribbon .band {
+      flex: 1; position: relative; overflow: hidden;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 1rem;
+      transition: flex-grow 1.1s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .swatch-fan.visible .swatch {
-      animation:
-        swatchIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) var(--d) both,
-        swatchBreathe 7s ease-in-out calc(var(--d) + 1.5s) infinite alternate;
+    .palette-ribbon .band:hover { flex-grow: 3; }
+    .palette-ribbon .band span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      white-space: nowrap;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.9s ease 0.15s, transform 0.9s ease 0.15s;
     }
-    @keyframes swatchIn {
-      from { opacity: 0; transform: translateX(-50%) rotate(0deg); }
-      to   { opacity: 1; transform: translateX(-50%) rotate(var(--r)); }
+    .palette-ribbon .band:hover span { opacity: 1; transform: none; }
+    .band-light span { color: rgba(26,15,13,0.65); }
+    .band-dark span  { color: rgba(250,246,240,0.85); }
+    @media (hover: none) {
+      .palette-ribbon { height: 56px; }
+      .palette-ribbon .band span { display: none; }
     }
-    @keyframes swatchBreathe {
-      from { opacity: 1; transform: translateX(-50%) rotate(var(--r)); }
-      to   { opacity: 1; transform: translateX(-50%) rotate(calc(var(--r) + 2.5deg)) translateY(-3px); }
-    }
-    .swatch:nth-child(1) { --r: -36deg; --d: 0s;    background: #b9c4b1; }
-    .swatch:nth-child(2) { --r: -21deg; --d: 0.14s; background: #adc3cf; }
-    .swatch:nth-child(3) { --r: -7deg;  --d: 0.28s; background: #d9afa1; }
-    .swatch:nth-child(4) { --r: 7deg;   --d: 0.42s; background: var(--champagne); }
-    .swatch:nth-child(5) { --r: 21deg;  --d: 0.56s; background: #b69e7d; }
-    .swatch:nth-child(6) { --r: 36deg;  --d: 0.7s;  background: var(--burgundy); }
     @media (prefers-reduced-motion: reduce) {
       .hero-img img { animation: none; }
-      .swatch { transition: none; animation: none !important; opacity: 1; transform: translateX(-50%) rotate(var(--r)); }
+      .palette-ribbon .band, .palette-ribbon .band span { transition: none; }
     }
     .service-body .eyebrow { display: block; margin-bottom: 0.5rem; }
     .service-body h3 {
@@ -367,10 +360,6 @@
       <div class="service-img">
         <span class="ghost-num" aria-hidden="true">02</span>
         <img src="mayara-en-44.jpg" alt="Mayara Toledo holding colour analysis drapes" loading="lazy">
-        <span class="swatch-fan" aria-hidden="true">
-          <span class="swatch"></span><span class="swatch"></span><span class="swatch"></span>
-          <span class="swatch"></span><span class="swatch"></span><span class="swatch"></span>
-        </span>
       </div>
       <div class="service-body">
         <span class="eyebrow">Colour Analysis</span>
@@ -393,6 +382,16 @@
       </div>
     </div>
   </section>
+
+  <!-- PALETTE RIBBON -->
+  <div class="palette-ribbon" aria-label="Seasonal colour palette">
+    <div class="band band-light" style="background:#b9c4b1;"><span>Sage</span></div>
+    <div class="band band-light" style="background:#adc3cf;"><span>Powder Blue</span></div>
+    <div class="band band-light" style="background:#d9afa1;"><span>Blush</span></div>
+    <div class="band band-light" style="background:#c6a664;"><span>Champagne</span></div>
+    <div class="band band-light" style="background:#b69e7d;"><span>Camel</span></div>
+    <div class="band band-dark"  style="background:#6e1f25;"><span>Burgundy</span></div>
+  </div>
 
   <!-- ABOUT -->
   <section class="about" id="about">
@@ -453,7 +452,7 @@
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal, .swatch-fan').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
