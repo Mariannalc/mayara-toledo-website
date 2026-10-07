@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayara Toledo · Personal Stylist &amp; Colour Analysis</title>
+  <meta name="description" content="Personal styling and colour analysis in the UK. Dress with clarity, confidence and intention — book a free 25-minute style call with Mayara Toledo.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── EN editorial palette: off-white + sand + champagne, burgundy as accent only ── */
+    :root {
+      --offwhite:  #faf6f0;
+      --sand:      #f1e9dd;
+      --sand-2:    #e7dccc;
+      --champagne: #c6a664;
+      --gold-text: #7A5830;   /* 4.9:1 on off-white */
+      --burgundy:  #6e1f25;   /* accent only */
+      --dark:      #1a0f0d;
+      --text:      #3a2820;
+      --muted:     #6B5F55;
+      --line:      rgba(58,40,32,0.14);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: var(--offwhite);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+
+    .serif { font-family: 'Cormorant Garamond', serif; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    nav.scrolled { background: rgba(250,246,240,0.95); box-shadow: 0 1px 0 var(--line); }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; letter-spacing: 0.12em; color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-links a:hover { color: var(--gold-text); }
+    .nav-lang { border: 1px solid var(--line); padding: 0.3rem 0.7rem; }
+
+    /* ── Buttons ── */
+    .btn-primary, .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 2.3rem;
+      border: none; background: transparent; cursor: pointer;
+      font-family: inherit; font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .btn-primary { background: var(--burgundy); color: var(--offwhite); }
+    .btn-primary:hover { background: var(--dark); }
+    .btn-outline { border: 1px solid var(--gold-text); color: var(--gold-text); }
+    .btn-outline:hover { background: var(--sand); }
+
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold-text);
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ── Hero: editorial split ── */
+    .hero {
+      display: grid; grid-template-columns: 1.05fr 1fr;
+      min-height: 100dvh; align-items: stretch;
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 7rem 4rem 4rem 5rem; gap: 1.4rem;
+      background: var(--offwhite);
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+      font-weight: 400; line-height: 1.08; color: var(--dark);
+    }
+    .hero-title em { font-style: italic; font-weight: 300; }
+    .hero-divider { width: 56px; height: 2px; background: var(--champagne); }
+    .hero-sub { font-size: 1.02rem; color: var(--muted); max-width: 46ch; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; }
+    .hero-img { position: relative; background: var(--sand); }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+    /* ── Sections ── */
+    section { padding: 6rem 5rem; }
+    .section-header { max-width: 640px; margin-bottom: 3rem; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 400; color: var(--dark);
+      margin: 0.6rem 0 0.8rem;
+    }
+
+    /* About */
+    .about { background: var(--sand); display: grid; grid-template-columns: 420px 1fr; gap: 4.5rem; align-items: center; }
+    .about-img img { width: 100%; height: auto; }
+    .about-body p { font-size: 1rem; line-height: 1.75; max-width: 58ch; }
+    .about-body p + p { margin-top: 0.9rem; }
+    .about-quote {
+      margin-top: 1.4rem; padding-left: 1.2rem; border-left: 2px solid var(--champagne);
+      font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic;
+      color: var(--gold-text); line-height: 1.6; max-width: 48ch;
+    }
+
+    /* Services */
+    .service { display: grid; grid-template-columns: 1fr 460px; gap: 4.5rem; align-items: center; }
+    .service.flip { grid-template-columns: 460px 1fr; }
+    .service + .service { margin-top: 6rem; }
+    .service-img img { width: 100%; height: auto; }
+    .service-body .eyebrow { display: block; margin-bottom: 0.5rem; }
+    .service-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 2.6vw, 2.3rem); font-weight: 400; color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .service-body p { font-size: 0.98rem; line-height: 1.75; color: var(--text); max-width: 54ch; }
+    .service-list { list-style: none; margin: 1.2rem 0 1.6rem; }
+    .service-list li {
+      padding: 0.55rem 0 0.55rem 1.6rem; position: relative;
+      font-size: 0.95rem; color: var(--text); border-bottom: 1px solid var(--line);
+    }
+    .service-list li::before {
+      content: ''; position: absolute; left: 0; top: 1.05rem;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--champagne);
+    }
+    .service-price {
+      display: flex; align-items: baseline; gap: 0.8rem; margin: 1.4rem 0 1.6rem;
+    }
+    .service-price .amount {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: var(--dark);
+    }
+    .service-price .note { font-size: 0.85rem; color: var(--muted); }
+
+    /* Booking CTA */
+    .booking {
+      background: var(--sand-2);
+      display: grid; grid-template-columns: 380px 1fr; gap: 4.5rem; align-items: center;
+    }
+    .booking-img img { width: 100%; height: auto; }
+    .booking-body h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 400; color: var(--dark); line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .booking-body h2 em { font-style: italic; }
+    .booking-body p { font-size: 1rem; color: var(--muted); max-width: 52ch; margin-bottom: 1.8rem; }
+
+    /* Footer */
+    footer {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      padding: 2.2rem 5rem; border-top: 1px solid var(--line);
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; letter-spacing: 0.12em; }
+    .footer-links { display: flex; gap: 1.8rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--gold-text); }
+    .footer-copy { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.4rem; }
+      .nav-links { gap: 1.1rem; }
+      .nav-links .nav-hide-mobile { display: none; }
+      section { padding: 4rem 1.4rem; }
+      .hero { grid-template-columns: 1fr; min-height: unset; }
+      .hero-text { padding: 6.5rem 1.4rem 3rem; }
+      .hero-img { max-height: 70vh; overflow: hidden; }
+      .about, .service, .service.flip, .booking { grid-template-columns: 1fr; gap: 2.2rem; }
+      .service.flip .service-img { order: -1; }
+      .service + .service { margin-top: 4rem; }
+      footer { padding: 2rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a class="nav-logo" href="#top">Mayara Toledo</a>
+    <ul class="nav-links">
+      <li class="nav-hide-mobile"><a href="#services">Services</a></li>
+      <li class="nav-hide-mobile"><a href="#about">About</a></li>
+      <li><a href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a call</a></li>
+      <li><a class="nav-lang" href="/" title="Versão em português">PT</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-text">
+      <span class="eyebrow reveal">Personal Stylist &amp; Colour Consultant · United Kingdom</span>
+      <h1 class="hero-title reveal">Dress like the woman<br><em>you've become.</em></h1>
+      <div class="hero-divider reveal"></div>
+      <p class="hero-sub reveal">
+        Personal styling and colour analysis for women who want clarity, confidence
+        and a wardrobe that works — without chasing trends.
+      </p>
+      <div class="hero-ctas reveal">
+        <a class="btn-primary" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a free 25-minute call</a>
+        <a class="btn-outline" href="#colour-analysis">Discover your colours</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="mayara-en-25.jpg" alt="Mayara Toledo, personal stylist" fetchpriority="high">
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-header">
+      <span class="eyebrow reveal">Services</span>
+      <h2 class="section-title reveal">A private service, built around you</h2>
+    </div>
+
+    <div class="service reveal" id="personal-styling">
+      <div class="service-body">
+        <span class="eyebrow">Personal Styling</span>
+        <h3>A wardrobe that finally works</h3>
+        <p>
+          A one-to-one styling service for women whose wardrobe no longer reflects who they are.
+          Together we edit what you own, define your style direction and build outfits
+          you can trust — for work, for life, for you.
+        </p>
+        <ul class="service-list">
+          <li>Wardrobe edit — what stays, what goes, what's missing</li>
+          <li>Personal style direction, grounded in your lifestyle</li>
+          <li>Outfit building and smarter shopping guidance</li>
+        </ul>
+        <a class="btn-primary" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Start with a free call</a>
+      </div>
+      <div class="service-img">
+        <img src="mayara-en-34.jpg" alt="Mayara Toledo — personal styling" loading="lazy">
+      </div>
+    </div>
+
+    <div class="service flip reveal" id="colour-analysis">
+      <div class="service-img">
+        <img src="mayara-en-44.jpg" alt="Mayara Toledo holding colour analysis drapes" loading="lazy">
+      </div>
+      <div class="service-body">
+        <span class="eyebrow">Colour Analysis</span>
+        <h3>Discover your colours</h3>
+        <p>
+          A personal colour analysis using professional fabric draping. Discover the palette
+          that brings out your natural colouring — and makes getting dressed, shopping
+          and combining pieces effortlessly simple.
+        </p>
+        <ul class="service-list">
+          <li>Full draping session with professional colour fabrics</li>
+          <li>Your personal colour palette to shop with</li>
+          <li>Practical guidance to wear your colours every day</li>
+        </ul>
+        <div class="service-price">
+          <span class="amount">£175</span>
+          <span class="note">£25 deposit secures your session</span>
+        </div>
+        <a class="btn-primary" href="https://cal.com/mayaratoledo/discover-your-colours-personal-colour-analysis">Book your colour analysis</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-img reveal">
+      <img src="mayara-en-17.jpg" alt="Mayara Toledo" loading="lazy">
+    </div>
+    <div class="about-body">
+      <span class="eyebrow reveal">About Mayara</span>
+      <h2 class="section-title reveal">Image is not about clothes.<br>It's about coherence.</h2>
+      <div class="reveal">
+        <p>
+          I grew up surrounded by women with a refined eye, where quality and elegance
+          mattered more than trends. I worked in fashion, lived behind the scenes of
+          television in Rio de Janeiro and, at 22, started from zero in England —
+          eventually reaching the corporate world of one of the largest law firms in the world.
+        </p>
+        <p>
+          There I saw something I couldn't ignore: accomplished women, in positions of
+          leadership, who didn't feel represented by their own image. I recognised myself in that.
+          So I trained in image consultancy and colour analysis — first to transform myself.
+        </p>
+        <blockquote class="about-quote">
+          "When your image is aligned with who you are, everything around you starts to respond differently."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="booking">
+    <div class="booking-img reveal">
+      <img src="mayara-en-43.jpg" alt="Mayara Toledo with colour palette fan" loading="lazy">
+    </div>
+    <div class="booking-body">
+      <h2 class="reveal">Not sure where to start?<br><em>Let's talk style.</em></h2>
+      <p class="reveal">
+        A free 25-minute call to understand where you are, what you need,
+        and which service makes sense for you. No pressure — just clarity.
+      </p>
+      <a class="btn-primary reveal" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book your free call</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Mayara Toledo</span>
+    <ul class="footer-links">
+      <li><a href="https://www.instagram.com/bymayaratoledo/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://wa.me/447300462457" target="_blank" rel="noopener">WhatsApp</a></li>
+      <li><a href="/">Português</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Mayara Toledo</span>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
