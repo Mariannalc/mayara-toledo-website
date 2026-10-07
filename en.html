@@ -85,27 +85,44 @@
       .reveal { opacity: 1; transform: none; transition: none; }
     }
 
-    /* ── Hero: editorial split ── */
+    /* ── Hero: editorial split with overlapping headline ── */
     .hero {
       display: grid; grid-template-columns: 1.05fr 1fr;
       min-height: 100dvh; align-items: stretch;
     }
     .hero-text {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 7rem 4rem 4rem 5rem; gap: 1.4rem;
+      padding: 7rem 0 4rem 5rem; gap: 1.4rem;
       background: var(--offwhite);
+      position: relative; z-index: 2;
     }
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+      font-size: clamp(2.6rem, 4.8vw, 4.4rem);
       font-weight: 400; line-height: 1.08; color: var(--dark);
+      width: 124%;   /* headline slides over the photo column */
     }
     .hero-title em { font-style: italic; font-weight: 300; }
     .hero-divider { width: 56px; height: 2px; background: var(--champagne); }
-    .hero-sub { font-size: 1.02rem; color: var(--muted); max-width: 46ch; }
+    .hero-sub { font-size: 1.02rem; color: var(--muted); max-width: 42ch; }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; }
-    .hero-img { position: relative; background: var(--sand); }
-    .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .hero-img { position: relative; background: var(--sand); overflow: hidden; }
+    .hero-img img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      animation: heroSettle 9s ease-out both;
+    }
+    @keyframes heroSettle { from { transform: scale(1.06); } to { transform: scale(1); } }
+    .hero-img::after {          /* champagne frame floating over the photo edge */
+      content: ''; position: absolute; inset: 2.2rem 2.2rem 2.2rem -2.2rem;
+      border: 1px solid var(--champagne); pointer-events: none; opacity: 0.85;
+    }
+    .hero-caption {
+      position: absolute; right: 2rem; bottom: 1.6rem; z-index: 2;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--offwhite); writing-mode: vertical-rl;
+      opacity: 0.9;
+    }
 
     /* ── Sections ── */
     section { padding: 6rem 5rem; }
@@ -116,9 +133,19 @@
       margin: 0.6rem 0 0.8rem;
     }
 
-    /* About */
+    /* About — arch crop with floating frame, photo bleeding out of the band */
     .about { background: var(--sand); display: grid; grid-template-columns: 420px 1fr; gap: 4.5rem; align-items: center; }
-    .about-img img { width: 100%; height: auto; }
+    .about-img { position: relative; margin-top: -9rem; }   /* photo breaks the band edge */
+    .about-img img {
+      width: 100%; height: auto;
+      border-radius: 999px 999px 0 0;                        /* editorial arch */
+      position: relative; z-index: 1;
+    }
+    .about-img::after {
+      content: ''; position: absolute; inset: 1.1rem -1.1rem -1.1rem 1.1rem;
+      border: 1px solid var(--champagne); border-radius: 999px 999px 0 0;
+      pointer-events: none;
+    }
     .about-body p { font-size: 1rem; line-height: 1.75; max-width: 58ch; }
     .about-body p + p { margin-top: 0.9rem; }
     .about-quote {
@@ -127,11 +154,67 @@
       color: var(--gold-text); line-height: 1.6; max-width: 48ch;
     }
 
-    /* Services */
-    .service { display: grid; grid-template-columns: 1fr 460px; gap: 4.5rem; align-items: center; }
+    /* Services — layered frames + ghost numerals */
+    .service { display: grid; grid-template-columns: 1fr 460px; gap: 5rem; align-items: center; }
     .service.flip { grid-template-columns: 460px 1fr; }
-    .service + .service { margin-top: 6rem; }
-    .service-img img { width: 100%; height: auto; }
+    .service + .service { margin-top: 7.5rem; }
+    .service-img { position: relative; }
+    .service-img img { width: 100%; height: auto; position: relative; z-index: 1; }
+    .service-img::before {      /* sand block offset behind the photo */
+      content: ''; position: absolute; inset: 1.6rem -1.6rem -1.6rem 1.6rem;
+      background: var(--sand-2);
+    }
+    .service-img::after {       /* thin champagne frame offset the other way */
+      content: ''; position: absolute; inset: -1.1rem 1.1rem 1.1rem -1.1rem;
+      border: 1px solid var(--champagne); z-index: 2; pointer-events: none;
+    }
+    .service.flip .service-img::before { inset: 1.6rem 1.6rem -1.6rem -1.6rem; }
+    .service.flip .service-img::after  { inset: -1.1rem -1.1rem 1.1rem 1.1rem; }
+    .ghost-num {
+      position: absolute; z-index: 3; top: -3.2rem; left: -2.4rem;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(4.5rem, 7vw, 6.5rem); line-height: 1;
+      color: var(--champagne); opacity: 0.55; pointer-events: none;
+    }
+    .service.flip .ghost-num { left: auto; right: -2.4rem; }
+
+    /* ── Colour swatch fan — slow, chic ── */
+    .swatch-fan {
+      position: absolute; z-index: 3; bottom: -2.6rem; right: -1.2rem;
+      width: 150px; height: 110px; pointer-events: none;
+    }
+    .swatch {
+      position: absolute; bottom: 0; left: 50%;
+      width: 34px; height: 92px; border-radius: 8px 8px 10px 10px;
+      border: 1px solid rgba(250,246,240,0.7);
+      box-shadow: 0 6px 18px rgba(26,15,13,0.18);
+      transform-origin: 50% 95%;
+      opacity: 0;
+      transform: translateX(-50%) rotate(0deg);
+    }
+    .swatch-fan.visible .swatch {
+      animation:
+        swatchIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) var(--d) both,
+        swatchBreathe 7s ease-in-out calc(var(--d) + 1.5s) infinite alternate;
+    }
+    @keyframes swatchIn {
+      from { opacity: 0; transform: translateX(-50%) rotate(0deg); }
+      to   { opacity: 1; transform: translateX(-50%) rotate(var(--r)); }
+    }
+    @keyframes swatchBreathe {
+      from { opacity: 1; transform: translateX(-50%) rotate(var(--r)); }
+      to   { opacity: 1; transform: translateX(-50%) rotate(calc(var(--r) + 2.5deg)) translateY(-3px); }
+    }
+    .swatch:nth-child(1) { --r: -36deg; --d: 0s;    background: #b9c4b1; }
+    .swatch:nth-child(2) { --r: -21deg; --d: 0.14s; background: #adc3cf; }
+    .swatch:nth-child(3) { --r: -7deg;  --d: 0.28s; background: #d9afa1; }
+    .swatch:nth-child(4) { --r: 7deg;   --d: 0.42s; background: var(--champagne); }
+    .swatch:nth-child(5) { --r: 21deg;  --d: 0.56s; background: #b69e7d; }
+    .swatch:nth-child(6) { --r: 36deg;  --d: 0.7s;  background: var(--burgundy); }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-img img { animation: none; }
+      .swatch { transition: none; animation: none !important; opacity: 1; transform: translateX(-50%) rotate(var(--r)); }
+    }
     .service-body .eyebrow { display: block; margin-bottom: 0.5rem; }
     .service-body h3 {
       font-family: 'Cormorant Garamond', serif;
@@ -156,12 +239,22 @@
     }
     .service-price .note { font-size: 0.85rem; color: var(--muted); }
 
-    /* Booking CTA */
+    /* Booking CTA — image breaks out of the band */
     .booking {
       background: var(--sand-2);
       display: grid; grid-template-columns: 380px 1fr; gap: 4.5rem; align-items: center;
+      margin-top: 5rem; padding-top: 0; padding-bottom: 5rem;
     }
-    .booking-img img { width: 100%; height: auto; }
+    .booking-img { position: relative; margin-top: -5rem; }
+    .booking-img img { width: 100%; height: auto; position: relative; z-index: 1; }
+    .booking-img::before {
+      content: ''; position: absolute; inset: 1.6rem -1.6rem -1.6rem 1.6rem;
+      background: var(--offwhite);
+    }
+    .booking-img::after {
+      content: ''; position: absolute; inset: -1.1rem 1.1rem 1.1rem -1.1rem;
+      border: 1px solid var(--champagne); z-index: 2; pointer-events: none;
+    }
     .booking-body h2 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 400; color: var(--dark); line-height: 1.15;
@@ -192,10 +285,18 @@
       section { padding: 4rem 1.4rem; }
       .hero { grid-template-columns: 1fr; min-height: unset; }
       .hero-text { padding: 6.5rem 1.4rem 3rem; }
+      .hero-title { width: 100%; }
       .hero-img { max-height: 70vh; overflow: hidden; }
+      .hero-img::after { inset: 1.2rem; }
+      .hero-caption { display: none; }
       .about, .service, .service.flip, .booking { grid-template-columns: 1fr; gap: 2.2rem; }
       .service.flip .service-img { order: -1; }
-      .service + .service { margin-top: 4rem; }
+      .service + .service { margin-top: 5rem; }
+      .service-img, .service.flip .service-img { margin: 0 1.6rem 1.6rem 0; }
+      .ghost-num, .service.flip .ghost-num { top: -2.4rem; left: auto; right: 0; }
+      .about-img { margin: 0 1.1rem; }
+      .booking { margin-top: 3rem; padding-bottom: 4rem; }
+      .booking-img { margin: -3rem 1.6rem 1.6rem 0; }
       footer { padding: 2rem 1.4rem; }
     }
   </style>
@@ -229,6 +330,7 @@
     </div>
     <div class="hero-img">
       <img src="mayara-en-25.jpg" alt="Mayara Toledo, personal stylist" fetchpriority="high">
+      <span class="hero-caption">Mayara Toledo · Image Consultant</span>
     </div>
   </header>
 
@@ -256,13 +358,19 @@
         <a class="btn-primary" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Start with a free call</a>
       </div>
       <div class="service-img">
+        <span class="ghost-num" aria-hidden="true">01</span>
         <img src="mayara-en-34.jpg" alt="Mayara Toledo — personal styling" loading="lazy">
       </div>
     </div>
 
     <div class="service flip reveal" id="colour-analysis">
       <div class="service-img">
+        <span class="ghost-num" aria-hidden="true">02</span>
         <img src="mayara-en-44.jpg" alt="Mayara Toledo holding colour analysis drapes" loading="lazy">
+        <span class="swatch-fan" aria-hidden="true">
+          <span class="swatch"></span><span class="swatch"></span><span class="swatch"></span>
+          <span class="swatch"></span><span class="swatch"></span><span class="swatch"></span>
+        </span>
       </div>
       <div class="service-body">
         <span class="eyebrow">Colour Analysis</span>
@@ -345,7 +453,7 @@
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal, .swatch-fan').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
