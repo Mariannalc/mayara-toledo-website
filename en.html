@@ -112,8 +112,8 @@
       animation: heroSettle 9s ease-out both;
     }
     @keyframes heroSettle { from { transform: scale(1.06); } to { transform: scale(1); } }
-    .hero-img::after {          /* champagne frame floating over the photo edge */
-      content: ''; position: absolute; inset: 2.2rem 2.2rem 2.2rem -2.2rem;
+    .hero-img::after {          /* champagne frame floating over the photo edge, below the fixed nav */
+      content: ''; position: absolute; inset: 5.5rem 2.2rem 2.2rem -2.2rem;
       border: 1px solid var(--champagne); pointer-events: none; opacity: 0.85;
     }
     .hero-caption {
@@ -232,22 +232,36 @@
     }
     .service-price .note { font-size: 0.85rem; color: var(--muted); }
 
-    /* Booking CTA — image breaks out of the band */
+    /* Booking CTA — mosaic left, text centre, image breaking out on the right */
     .booking {
       background: var(--sand-2);
-      display: grid; grid-template-columns: 380px 1fr; gap: 4.5rem; align-items: center;
+      display: grid; grid-template-columns: 150px 1fr 380px; gap: 4rem; align-items: center;
       margin-top: 5rem; padding-top: 0; padding-bottom: 5rem;
     }
     .booking-img { position: relative; margin-top: -5rem; }
     .booking-img img { width: 100%; height: auto; position: relative; z-index: 1; }
     .booking-img::before {
-      content: ''; position: absolute; inset: 1.6rem -1.6rem -1.6rem 1.6rem;
+      content: ''; position: absolute; inset: 1.6rem 1.6rem -1.6rem -1.6rem;
       background: var(--offwhite);
     }
     .booking-img::after {
-      content: ''; position: absolute; inset: -1.1rem 1.1rem 1.1rem -1.1rem;
+      content: ''; position: absolute; inset: -1.1rem -1.1rem 1.1rem 1.1rem;
       border: 1px solid var(--champagne); z-index: 2; pointer-events: none;
     }
+
+    /* Vertical palette mosaic — two staggered columns, tiles open under the mouse */
+    .palette-mosaic {
+      align-self: stretch; display: flex; gap: 5px; padding: 3rem 0;
+      cursor: crosshair;
+    }
+    .palette-mosaic .col { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .palette-mosaic .col:last-child { padding-top: 2.2rem; }   /* stagger = mosaic feel */
+    .palette-mosaic .tile {
+      flex: 1; min-height: 0;
+      transition: flex-grow 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.9s ease;
+    }
+    .palette-mosaic .tile:hover { flex-grow: 2.4; filter: brightness(1.07); }
+    @media (prefers-reduced-motion: reduce) { .palette-mosaic .tile { transition: none; } }
     .booking-body h2 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 400; color: var(--dark); line-height: 1.15;
@@ -289,7 +303,8 @@
       .ghost-num, .service.flip .ghost-num { top: -2.4rem; left: auto; right: 0; }
       .about-img { margin: 0 1.1rem; }
       .booking { margin-top: 3rem; padding-bottom: 4rem; }
-      .booking-img { margin: -3rem 1.6rem 1.6rem 0; }
+      .palette-mosaic { display: none; }
+      .booking-img { order: -1; margin: -3rem 0 1.6rem 1.6rem; }
       footer { padding: 2rem 1.4rem; }
     }
   </style>
@@ -422,8 +437,21 @@
 
   <!-- BOOKING CTA -->
   <section class="booking">
-    <div class="booking-img reveal">
-      <img src="mayara-en-43.jpg" alt="Mayara Toledo with colour palette fan" loading="lazy">
+    <div class="palette-mosaic" aria-hidden="true">
+      <div class="col">
+        <div class="tile" style="background:#b9c4b1;"></div>
+        <div class="tile" style="background:#d9afa1;"></div>
+        <div class="tile" style="background:#c6a664;"></div>
+        <div class="tile" style="background:#adc3cf;"></div>
+        <div class="tile" style="background:#6e1f25;"></div>
+      </div>
+      <div class="col">
+        <div class="tile" style="background:#e7dccc;"></div>
+        <div class="tile" style="background:#b69e7d;"></div>
+        <div class="tile" style="background:#adc3cf;"></div>
+        <div class="tile" style="background:#d9afa1;"></div>
+        <div class="tile" style="background:#b9c4b1;"></div>
+      </div>
     </div>
     <div class="booking-body">
       <h2 class="reveal">Not sure where to start?<br><em>Let's talk style.</em></h2>
@@ -432,6 +460,9 @@
         and which service makes sense for you. No pressure — just clarity.
       </p>
       <a class="btn-primary reveal" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book your free call</a>
+    </div>
+    <div class="booking-img reveal">
+      <img src="mayara-en-43.jpg" alt="Mayara Toledo with colour palette fan" loading="lazy">
     </div>
   </section>
 
@@ -443,7 +474,7 @@
       <li><a href="https://wa.me/447300462457" target="_blank" rel="noopener">WhatsApp</a></li>
       <li><a href="/">Português</a></li>
     </ul>
-    <span class="footer-copy">© 2026 Mayara Toledo</span>
+    <span class="footer-copy">© 2026 Mayara Toledo · empowered by <a href="https://lexiscale.ai" target="_blank" rel="noopener" style="color:var(--gold-text);text-decoration:none;">lexiscale</a></span>
   </footer>
 
   <script>
