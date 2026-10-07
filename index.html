@@ -2338,9 +2338,8 @@
       </div>
       <p class="agendamento-name">Mayara Toledo</p>
       <div class="agendamento-creds">
-        <span>Estrategista de Imagem Pessoal</span>
+        <span>Personal Stylist</span>
         <span>Colorimetria</span>
-        <span>Kibbe Body Type</span>
       </div>
     </div>
     <div class="agendamento-text">
@@ -2371,7 +2370,7 @@
     <ul class="footer-links">
       <li><a href="https://www.instagram.com/bymayaratoledo/" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="https://wa.me/447300462457" target="_blank" rel="noopener">WhatsApp</a></li>
-      <li><a href="https://cal.com/mayaratoledo/primeira-reuniao" target="_blank" rel="noopener">Agendar Conversa</a></li>
+      <li><a href="https://cal.com/mayaratoledo/vamos-conversar-sobre-seu-estilo-chamada-gratuita-de-25-minutos" target="_blank" rel="noopener">Agendar Conversa</a></li>
       <li><a href="#mentoria" onclick="setTimeout(openMentoriaForm,400)">Garantir Minha Vaga</a></li>
     </ul>
     <span class="footer-copy">© 2026 Mayara Toledo · Elegância sem Frescura</span>
@@ -2384,7 +2383,7 @@
       <button class="intake-close" id="intake-close" aria-label="Fechar">×</button>
 
       <!-- Progress bars (4 steps) -->
-      <div class="intake-progress" aria-hidden="true">
+      <div class="intake-progress" aria-hidden="true" style="display:none;">
         <div class="intake-progress-bar" id="bar-0"></div>
         <div class="intake-progress-bar" id="bar-1"></div>
         <div class="intake-progress-bar" id="bar-2"></div>
@@ -2509,8 +2508,8 @@
         </div>
         <p class="intake-error" id="contact-error">Por favor, preencha nome e e-mail antes de continuar.</p>
         <div class="intake-nav">
-          <button class="intake-back" onclick="goToStep(3)">← Voltar</button>
-          <button class="btn-primary" onclick="finishIntake()">Agendar meu café →</button>
+          <span></span>
+          <button class="btn-primary" onclick="finishIntake()">Agendar minha conversa →</button>
         </div>
       </div>
 
@@ -2559,8 +2558,8 @@
         <h2 class="intake-heading" style="font-size:1.4rem;">Escolha como pagar</h2>
         <p class="intake-sub">Pagamento seguro via Stripe.</p>
         <div style="display:flex;flex-direction:column;gap:0.8rem;max-width:320px;margin:1.5rem auto 0;">
-          <a class="btn-primary" href="https://buy.stripe.com/14AaEYc9Ec1D8PM4gNgQE02" style="text-align:center;align-self:stretch;">Pagar £95 · Reino Unido</a>
-          <a class="btn-primary" href="https://buy.stripe.com/aFa3cwa1wd5H7LIcNjgQE03" style="text-align:center;align-self:stretch;">Pagar R$647 · Brasil</a>
+          <a class="btn-primary" href="https://buy.stripe.com/14AaEYc9Ec1D8PM4gNgQE02" style="text-align:center;align-self:stretch;">Pagar em Libras · £95</a>
+          <a class="btn-primary" href="https://buy.stripe.com/aFa3cwa1wd5H7LIcNjgQE03" style="text-align:center;align-self:stretch;">Pagar em Reais · R$647</a>
         </div>
       </div>
 
@@ -2606,7 +2605,7 @@
 
     function openIntake() {
       document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
-      document.getElementById('step-0').classList.add('active');
+      document.getElementById('step-4').classList.add('active');
       document.querySelectorAll('.intake-modal input[type="radio"], .intake-modal input[type="checkbox"]').forEach(i => { i.checked = false; });
       document.querySelectorAll('.intake-option').forEach(o => o.classList.remove('selected'));
       document.getElementById('contact-name').value = '';
@@ -2679,7 +2678,7 @@
       if (q2) lines.push('Meu guarda-roupa hoje: ' + q2);
       if (q3) lines.push('Expectativas: ' + q3);
       const notes = lines.join('\n');
-      const base = 'https://cal.com/mayaratoledo/primeira-reuniao';
+      const base = 'https://cal.com/mayaratoledo/vamos-conversar-sobre-seu-estilo-chamada-gratuita-de-25-minutos';
       const url = notes ? base + '?notes=' + encodeURIComponent(notes) : base;
       closeIntake();
       window.open(url, '_blank', 'noopener');
