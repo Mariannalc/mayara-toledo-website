@@ -103,3 +103,23 @@ describe('EN spec 09/10', () => {
     expect(en).not.toContain('starts to respond differently');
   });
 });
+
+const esf = fs.readFileSync(path.join(__dirname, '..', 'elegancia-sem-frescura.html'), 'utf8');
+const vercel = fs.readFileSync(path.join(__dirname, '..', 'vercel.json'), 'utf8');
+
+describe('ESF landing page', () => {
+  test('served at /elegancia-sem-frescura', () => {
+    expect(vercel).toContain('"/elegancia-sem-frescura"');
+    expect(html).toContain('href="/elegancia-sem-frescura"');
+  });
+  test('presented as a Mayara Toledo programme with checkout', () => {
+    expect(esf).toContain('Um programa Mayara Toledo');
+    expect(esf).toContain('buy.stripe.com/14AaEYc9Ec1D8PM4gNgQE02');
+    expect(esf).toContain('buy.stripe.com/aFa3cwa1wd5H7LIcNjgQE03');
+  });
+  test('wired to the admin open/waitlist switch', () => {
+    expect(esf).toContain("fetch('/api/settings')");
+    expect(esf).toContain('openWaitlistForm');
+    expect(esf).toContain('Entrar na lista de espera');
+  });
+});

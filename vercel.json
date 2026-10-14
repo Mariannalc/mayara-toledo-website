@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/en", "destination": "/en.html" }
+    { "source": "/en", "destination": "/en.html" },
+    { "source": "/elegancia-sem-frescura", "destination": "/elegancia-sem-frescura.html" }
   ]
 }

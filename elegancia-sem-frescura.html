@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elegância sem Frescura · um programa Mayara Toledo</title>
+  <meta name="description" content="Elegância sem Frescura: a mentoria em grupo da Mayara Toledo para construir um guarda-roupa elegante, prático e coerente com quem você é. Quatro encontros ao vivo, método prático e acompanhamento próximo.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:          #f6efe7;
+      --cream-2:        #ede4d9;
+      --rose:           #d9afa1;
+      --burgundy:       #6e1f25;
+      --burgundy-dark:  #571820;
+      --taupe:          #b69e7d;
+      --gold:           #c6a664;
+      --gold-text:      #7A5830;
+      --dark:           #1a0f0d;
+      --text:           #3a2820;
+      --muted:          #6B5F55;
+      --line:           rgba(58,40,32,0.14);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    nav.scrolled { background: rgba(246,239,231,0.98); backdrop-filter: blur(6px); box-shadow: 0 1px 0 var(--line); }
+    nav.scrolled .nav-logo, nav.scrolled .nav-cta { color: var(--dark); }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; letter-spacing: 0.12em; color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-cta {
+      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--cream); text-decoration: none;
+    }
+    .nav-cta:hover { color: var(--gold); }
+
+    /* ── Buttons ── */
+    .btn-primary, .btn-gold, .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 52px; padding: 0.6rem 2.3rem;
+      border: none; background: transparent; cursor: pointer;
+      font-family: inherit; font-size: 0.8125rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+      text-align: center;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .btn-primary { background: var(--burgundy); color: var(--cream); }
+    .btn-primary:hover { background: var(--dark); }
+    .btn-gold { background: var(--gold); color: var(--dark); font-weight: 600; }
+    .btn-gold:hover { background: var(--taupe); }
+
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold-text);
+    }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    /* ── Hero (burgundy, programa da marca) ── */
+    .hero {
+      min-height: 100dvh;
+      background: linear-gradient(160deg, var(--burgundy) 0%, var(--burgundy-dark) 70%, #3f1118 100%);
+      color: var(--cream);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 1.5rem 4rem; gap: 1.3rem;
+    }
+    .hero .eyebrow { color: var(--gold); }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.4rem); font-weight: 400; line-height: 1.05;
+    }
+    .hero h1 em { font-style: italic; font-weight: 300; }
+    .hero-divider { width: 56px; height: 2px; background: var(--gold); }
+    .hero-sub {
+      font-size: 1.125rem; color: rgba(246,239,231,0.82); max-width: 54ch; line-height: 1.75;
+    }
+    .hero-meta {
+      display: flex; gap: 2.2rem; flex-wrap: wrap; justify-content: center;
+      margin-top: 0.8rem;
+    }
+    .hero-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(246,239,231,0.7);
+    }
+    .hero .btn-gold { margin-top: 1.2rem; }
+    #mentoria-announcement {
+      font-size: 0.95rem; color: var(--gold);
+      border: 1px solid rgba(198,166,100,0.4); padding: 0.6rem 1.4rem;
+      white-space: pre-line;
+    }
+
+    /* ── Sections ── */
+    section { padding: 5.5rem 1.5rem; }
+    .inner { max-width: 1060px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold-text); display: block; margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.6vw, 2.9rem); font-weight: 400; color: var(--dark); line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-sub { font-size: 1.125rem; color: var(--muted); max-width: 60ch; }
+
+    /* Para quem é */
+    .quem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
+    .quem-card {
+      border: 1px solid var(--line); background: #fff9f2;
+      padding: 1.6rem 1.8rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .quem-card .mark {
+      flex-shrink: 0; width: 9px; height: 9px; border-radius: 50%;
+      background: var(--gold); margin-top: 0.55rem;
+    }
+    .quem-card p { font-size: 1.0625rem; }
+
+    /* Manifesto strip */
+    .manifesto {
+      background: var(--cream-2); text-align: center;
+    }
+    .manifesto blockquote {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.5; color: var(--burgundy);
+      max-width: 34ch; margin: 0 auto;
+    }
+
+    /* Método — 4 encontros */
+    .sessions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
+    .session-card {
+      border: 1px solid var(--line); background: #fff9f2; padding: 2rem 1.8rem;
+    }
+    .session-number {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.8rem; color: var(--gold); margin-bottom: 0.4rem;
+    }
+    .session-card h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 500;
+      color: var(--dark); margin-bottom: 0.4rem;
+    }
+    .session-card p { font-size: 1rem; color: var(--muted); }
+
+    /* Benefícios */
+    .leva-list { list-style: none; margin-top: 2rem; max-width: 640px; }
+    .leva-list li {
+      padding: 0.8rem 0 0.8rem 2rem; position: relative;
+      font-size: 1.0625rem; border-bottom: 1px solid var(--line);
+    }
+    .leva-list li::before {
+      content: '✦'; position: absolute; left: 0; top: 0.8rem;
+      color: var(--gold); font-size: 0.9rem;
+    }
+
+    /* Depoimentos */
+    .depo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 2.4rem; }
+    .depo-card {
+      border: 1px solid var(--line); background: #fff9f2; padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 1.1rem;
+    }
+    .depo-card blockquote {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.1rem; line-height: 1.6; color: var(--text);
+    }
+    .depo-card cite {
+      font-style: normal; font-size: 0.8125rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-text);
+      margin-top: auto;
+    }
+
+    /* Investimento (burgundy band) */
+    .investimento {
+      background: linear-gradient(160deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+      color: var(--cream); text-align: center;
+    }
+    .investimento .section-label { color: var(--gold); }
+    .investimento .section-title { color: var(--cream); }
+    .preco-wrapper { display: flex; gap: 2.5rem; align-items: baseline; justify-content: center; margin: 2rem 0 1rem; flex-wrap: wrap; }
+    .preco { font-family: 'Cormorant Garamond', serif; font-size: 4.6rem; line-height: 1; }
+    .preco small { font-size: 1.8rem; vertical-align: super; opacity: 0.75; }
+    .preco-currency {
+      font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-top: 0.4rem;
+    }
+    .preco-divider { font-size: 0.875rem; letter-spacing: 0.2em; color: rgba(246,239,231,0.4); text-transform: uppercase; }
+    .inclui-list {
+      list-style: none; max-width: 520px; margin: 1.6rem auto 2.2rem; text-align: left;
+    }
+    .inclui-list li {
+      padding: 0.7rem 0 0.7rem 1.8rem; position: relative;
+      font-size: 1.0625rem; color: rgba(246,239,231,0.88);
+      border-bottom: 1px solid rgba(246,239,231,0.12);
+    }
+    .inclui-list li::before {
+      content: '✓'; position: absolute; left: 0; top: 0.7rem; color: var(--gold);
+    }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-item:first-of-type { border-top: 1px solid var(--line); margin-top: 2rem; }
+    .faq-item summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.1rem 0; cursor: pointer; list-style: none;
+      font-size: 1.0625rem; color: var(--dark);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; flex-shrink: 0;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; line-height: 1;
+      color: var(--gold-text);
+    }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item summary:hover { color: var(--gold-text); }
+    .faq-item summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .faq-item .faq-body { padding: 0 1.8rem 1.1rem 0; }
+    .faq-item .faq-body p { font-size: 1rem; color: var(--muted); }
+
+    /* CTA final */
+    .cta-final { text-align: center; background: var(--cream-2); }
+    .cta-final .section-title { margin-bottom: 0.4rem; }
+    .cta-final .section-sub { margin: 0 auto 2rem; }
+
+    /* Footer */
+    footer {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      padding: 2.2rem 3rem; border-top: 1px solid var(--line); background: var(--cream);
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; letter-spacing: 0.12em; }
+    .footer-links { display: flex; gap: 1.8rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.8125rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--gold-text); }
+    .footer-copy { font-size: 0.8125rem; color: var(--muted); }
+
+    /* ── Modals (same system as the home page) ── */
+    #mentoria-overlay, #waitlist-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(26,15,13,0.55);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+    #mentoria-overlay.open, #waitlist-overlay.open { opacity: 1; pointer-events: all; }
+    .mentoria-modal {
+      background: var(--cream); max-width: 480px; width: 100%;
+      padding: 2.6rem 2.4rem; position: relative;
+      transform: translateY(14px); transition: transform 0.3s ease;
+      max-height: 90dvh; overflow-y: auto;
+    }
+    #mentoria-overlay.open .mentoria-modal, #waitlist-overlay.open .mentoria-modal { transform: translateY(0); }
+    .intake-close {
+      position: absolute; top: 0.9rem; right: 1.1rem;
+      background: none; border: none; font-size: 1.6rem; color: var(--muted); cursor: pointer;
+    }
+    .intake-close:hover { color: var(--dark); }
+    .mentoria-step { display: none; }
+    .mentoria-step.active { display: block; }
+    .intake-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold-text);
+    }
+    .intake-heading {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400;
+      color: var(--dark); margin: 0.4rem 0 0.5rem;
+    }
+    .intake-sub { font-size: 1rem; color: var(--muted); margin-bottom: 1.4rem; }
+    .intake-field { margin-bottom: 1rem; }
+    .intake-label {
+      display: block; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold-text); margin-bottom: 0.35rem;
+    }
+    .intake-input {
+      width: 100%; min-height: 48px; padding: 0.5rem 0.9rem;
+      border: 1px solid var(--line); background: #fff9f2;
+      font-family: inherit; font-size: 1.125rem; color: var(--text);
+    }
+    .intake-input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+    .intake-error { display: none; font-size: 0.875rem; color: #a33; margin-bottom: 0.8rem; }
+    .intake-error.visible { display: block; }
+    .intake-nav { display: flex; }
+
+    /* ── Responsive ── */
+    @media (max-width: 820px) {
+      nav { padding: 1rem 1.4rem; }
+      section { padding: 4rem 1.4rem; }
+      .quem-grid, .sessions { grid-template-columns: 1fr; }
+      .depo-grid { grid-template-columns: 1fr; gap: 1.1rem; }
+      .hero-meta { gap: 1rem 1.6rem; }
+      .mentoria-modal { padding: 2.2rem 1.5rem; }
+      footer { padding: 2rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a class="nav-logo" href="/">Mayara Toledo</a>
+    <button class="nav-cta" style="background:none;border:none;cursor:pointer;" onclick="openMentoriaForm()">Garantir minha vaga</button>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="eyebrow reveal">Um programa Mayara Toledo · Mentoria em grupo</span>
+    <h1 class="reveal">Elegância<br><em>sem Frescura</em></h1>
+    <div class="hero-divider reveal"></div>
+    <p class="hero-sub reveal">
+      Não é um curso sobre tendências. É um método de quatro encontros online e ao vivo
+      para você construir uma imagem coerente com quem se tornou — com clareza,
+      intenção e elegância real.
+    </p>
+    <div class="hero-meta reveal">
+      <span>4 encontros ao vivo</span>
+      <span>Quintas · 11am Londres · 7h Brasília</span>
+      <span>Turma pequena</span>
+    </div>
+    <p id="mentoria-announcement" class="reveal" style="display:none;"></p>
+    <button class="btn-gold reveal" onclick="openMentoriaForm()">Garantir minha vaga</button>
+  </header>
+
+  <!-- PARA QUEM É -->
+  <section id="para-quem">
+    <div class="inner">
+      <span class="section-label reveal">Para quem é</span>
+      <h2 class="section-title reveal">Se você se reconhece aqui,<br>este programa é para você.</h2>
+      <div class="quem-grid reveal">
+        <div class="quem-card"><span class="mark"></span><p>Sente que o guarda-roupa está cheio, mas nunca tem o que vestir.</p></div>
+        <div class="quem-card"><span class="mark"></span><p>Quer parar de comprar por impulso e construir um estilo próprio.</p></div>
+        <div class="quem-card"><span class="mark"></span><p>Está em uma transição de vida e quer reinventar a própria imagem.</p></div>
+        <div class="quem-card"><span class="mark"></span><p>Busca mais confiança e clareza ao se vestir no dia a dia.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <blockquote class="reveal">
+      "Existe uma diferença entre parecer bem-vestida e sentir-se inteira.
+      <em>Este programa é sobre a segunda.</em>"
+    </blockquote>
+  </section>
+
+  <!-- MÉTODO -->
+  <section id="metodo">
+    <div class="inner">
+      <span class="section-label reveal">O método</span>
+      <h2 class="section-title reveal">4 Encontros, 4 Transformações</h2>
+      <p class="section-sub reveal">Encontros ao vivo, exercícios práticos e acompanhamento no grupo durante toda a jornada.</p>
+      <div class="sessions reveal">
+        <div class="session-card">
+          <div class="session-number">01</div>
+          <h3>Detox com Direção</h3>
+          <p>Antes de comprar qualquer coisa, você precisa enxergar o que já tem.</p>
+        </div>
+        <div class="session-card">
+          <div class="session-number">02</div>
+          <h3>Tecidos, Caimento e Qualidade</h3>
+          <p>Compre melhor. Escolha com mais critério.</p>
+        </div>
+        <div class="session-card">
+          <div class="session-number">03</div>
+          <h3>Estilo com Identidade</h3>
+          <p>Entenda o que faz você se sentir bonita, segura e reconhecível.</p>
+        </div>
+        <div class="session-card">
+          <div class="session-number">04</div>
+          <h3>Refinando a Imagem e Criando Looks</h3>
+          <p>Use proporção, acessórios e combinações para fazer o seu guarda-roupa trabalhar a seu favor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE VOCÊ VAI LEVAR -->
+  <section id="beneficios" style="background:#fff9f2;">
+    <div class="inner">
+      <span class="section-label reveal">Benefícios</span>
+      <h2 class="section-title reveal">O que você vai levar dessa jornada</h2>
+      <ul class="leva-list reveal">
+        <li>Um guarda-roupa mais funcional e alinhado à sua vida.</li>
+        <li>Clareza sobre o que fica, o que sai e o que realmente falta.</li>
+        <li>Critério para comprar melhor e evitar desperdício.</li>
+        <li>Mais entendimento sobre qualidade, caimento e acabamento.</li>
+        <li>Uma direção de estilo que faça sentido para você.</li>
+        <li>Mais repertório para montar looks com as peças que já possui.</li>
+        <li>Um método simples para continuar evoluindo sua imagem com autonomia.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="inner">
+      <span class="section-label reveal">Depoimentos</span>
+      <h2 class="section-title reveal">O que as alunas dizem</h2>
+      <div class="depo-grid reveal">
+        <div class="depo-card">
+          <blockquote>"Finalmente entendo por que certas roupas nunca me fizeram sentido. Em quatro semanas aprendi mais sobre mim mesma do que em anos comprando por impulso."</blockquote>
+          <cite>Ana C. · São Paulo</cite>
+        </div>
+        <div class="depo-card">
+          <blockquote>"A Mayara tem um dom de traduzir imagem em algo muito pessoal. Saí sabendo exatamente o que quero e o que não quero mais no meu guarda-roupa."</blockquote>
+          <cite>Fernanda M. · Londres</cite>
+        </div>
+        <div class="depo-card">
+          <blockquote>"Deixei de me vestir para os outros e passei a me vestir para mim. Parece simples, mas mudou tudo."</blockquote>
+          <cite>Juliana B. · Manchester</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTIMENTO -->
+  <section class="investimento" id="investimento">
+    <div class="inner">
+      <span class="section-label reveal">Investimento</span>
+      <h2 class="section-title reveal">Uma jornada prática de quatro semanas</h2>
+      <div class="preco-wrapper reveal">
+        <div>
+          <span class="preco"><small>R$</small>647</span>
+          <span class="preco-currency">Reais · Brasil</span>
+        </div>
+        <span class="preco-divider">ou</span>
+        <div>
+          <span class="preco"><small>£</small>95</span>
+          <span class="preco-currency">Libras · Reino Unido</span>
+        </div>
+      </div>
+      <ul class="inclui-list reveal">
+        <li>4 encontros ao vivo pelo Zoom</li>
+        <li>Gravações de todas as aulas</li>
+        <li>Grupo exclusivo no WhatsApp</li>
+        <li>Exercícios práticos semanais</li>
+        <li>Material de apoio</li>
+        <li>Acompanhamento no grupo durante a mentoria, com respostas em dias úteis</li>
+      </ul>
+      <button class="btn-gold reveal" onclick="openMentoriaForm()">Garantir minha vaga</button>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="inner">
+      <span class="section-label reveal">Dúvidas frequentes</span>
+      <h2 class="section-title reveal">Perguntas frequentes</h2>
+      <div class="reveal">
+        <details class="faq-item">
+          <summary>Para quem é a mentoria Elegância sem Frescura?</summary>
+          <div class="faq-body"><p>Para mulheres que sentem que o guarda-roupa já não representa quem são, querem parar de comprar por impulso e desejam se vestir com mais clareza, elegância e intenção — sem depender de tendências ou de um armário cheio.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Preciso morar no Reino Unido para participar?</summary>
+          <div class="faq-body"><p>Não. A mentoria é online e foi pensada para mulheres no Brasil, no Reino Unido e em outros lugares do mundo. Os encontros acontecem às quintas-feiras, às 7h, no horário de Brasília.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>E se eu não puder participar de algum encontro ao vivo?</summary>
+          <div class="faq-body"><p>Todas as aulas ficam gravadas para que você possa acompanhar no seu ritmo. Você não fica para trás: os exercícios e as orientações também ficam disponíveis no grupo exclusivo da turma.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Como funciona o suporte no WhatsApp?</summary>
+          <div class="faq-body"><p>O grupo é o nosso espaço para exercícios, dúvidas e acompanhamento entre os encontros. Você pode enviar suas dúvidas por lá e receberá orientações em dias úteis, ao longo da mentoria.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Qual é a diferença entre a mentoria em grupo e a consultoria individual?</summary>
+          <div class="faq-body"><p>A mentoria em grupo é uma jornada guiada de quatro semanas, com método, aulas e exercícios para você desenvolver autonomia ao se vestir. A consultoria individual é um serviço separado, desenhado de forma personalizada para as necessidades de cada cliente.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <h2 class="section-title reveal">Pronta para se vestir<br><em>com intenção?</em></h2>
+    <p class="section-sub reveal">Garanta sua vaga na próxima turma do Elegância sem Frescura.</p>
+    <button class="btn-primary reveal" onclick="openMentoriaForm()">Garantir minha vaga</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Mayara Toledo</span>
+    <ul class="footer-links">
+      <li><a href="/">mayaratoledo.com</a></li>
+      <li><a href="https://www.instagram.com/bymayaratoledo/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://wa.me/447300462457" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Mayara Toledo · Elegância sem Frescura</span>
+  </footer>
+
+  <!-- LEAD MODAL -->
+  <div id="mentoria-overlay" role="dialog" aria-modal="true" aria-label="Início da sua jornada de estilo">
+    <div class="mentoria-modal">
+      <button class="intake-close" id="mentoria-close" aria-label="Fechar">&times;</button>
+      <div id="mf-step-1" class="mentoria-step active">
+        <span class="intake-eyebrow">Início da sua jornada de estilo</span>
+        <h2 class="intake-heading">Reservar a sua vaga</h2>
+        <p class="intake-sub">Preencha os seus dados e será redirecionada para o pagamento seguro.</p>
+        <div class="intake-field">
+          <label class="intake-label" for="mf-name">Nome completo *</label>
+          <input type="text" id="mf-name" class="intake-input" placeholder="Seu nome" autocomplete="name">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="mf-email">E-mail *</label>
+          <input type="email" id="mf-email" class="intake-input" placeholder="seu@email.com" autocomplete="email">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="mf-phone">WhatsApp (opcional)</label>
+          <input type="tel" id="mf-phone" class="intake-input" placeholder="+44 ou +55..." autocomplete="tel">
+        </div>
+        <p class="intake-error" id="mf-error">Por favor, preencha nome e e-mail antes de continuar.</p>
+        <div class="intake-nav" style="justify-content:flex-end;">
+          <button class="btn-primary" onclick="submitMentoriaForm()">Garantir minha vaga →</button>
+        </div>
+      </div>
+      <div id="mf-step-sending" class="mentoria-step" style="text-align:center;padding:4rem 1rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);margin-bottom:1.2rem;">✦</div>
+        <p class="intake-heading" style="font-size:1.4rem;">A processar...</p>
+        <p style="color:var(--muted);font-size:1rem;margin-top:0.5rem;">Um momento…</p>
+      </div>
+      <div id="mf-step-pay" class="mentoria-step" style="text-align:center;padding:3rem 1.5rem;">
+        <span class="intake-eyebrow">Último passo</span>
+        <h2 class="intake-heading" style="font-size:1.4rem;">Escolha como pagar</h2>
+        <p class="intake-sub">Pagamento seguro via Stripe.</p>
+        <div style="display:flex;flex-direction:column;gap:0.8rem;max-width:320px;margin:1.5rem auto 0;">
+          <a class="btn-primary" href="https://buy.stripe.com/14AaEYc9Ec1D8PM4gNgQE02" style="align-self:stretch;">Pagar em Libras · £95</a>
+          <a class="btn-primary" href="https://buy.stripe.com/aFa3cwa1wd5H7LIcNjgQE03" style="align-self:stretch;">Pagar em Reais · R$647</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAITLIST MODAL -->
+  <div id="waitlist-overlay" role="dialog" aria-modal="true" aria-label="Lista de espera">
+    <div class="mentoria-modal">
+      <button class="intake-close" id="waitlist-close" aria-label="Fechar">&times;</button>
+      <div id="wl-step-1" class="mentoria-step active">
+        <span class="intake-eyebrow">Mentoria em grupo</span>
+        <h2 class="intake-heading">Lista de espera</h2>
+        <p class="intake-sub">As vagas estão encerradas por agora. Deixe o seu e-mail e será a primeira a saber quando abrirmos de novo.</p>
+        <div class="intake-field">
+          <label class="intake-label" for="wl-name">Nome completo *</label>
+          <input type="text" id="wl-name" class="intake-input" placeholder="Seu nome" autocomplete="name">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="wl-email">E-mail *</label>
+          <input type="email" id="wl-email" class="intake-input" placeholder="seu@email.com" autocomplete="email">
+        </div>
+        <div class="intake-field">
+          <label class="intake-label" for="wl-phone">WhatsApp (opcional)</label>
+          <input type="tel" id="wl-phone" class="intake-input" placeholder="+44 ou +55..." autocomplete="tel">
+        </div>
+        <p class="intake-error" id="wl-error">Por favor, preencha nome e e-mail antes de continuar.</p>
+        <div class="intake-nav" style="justify-content:flex-end;">
+          <button class="btn-primary" onclick="submitWaitlistForm()">Entrar na lista →</button>
+        </div>
+      </div>
+      <div id="wl-step-done" class="mentoria-step" style="text-align:center;padding:4rem 1rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);margin-bottom:1.2rem;">✦</div>
+        <p class="intake-heading" style="font-size:1.4rem;">Você está na lista!</p>
+        <p style="color:var(--muted);font-size:1rem;margin-top:0.5rem;">Assim que as vagas abrirem, você será a primeira a saber.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Nav + reveal ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Lead modal (same flow as the home page) ──
+    const mentoriaOverlay = document.getElementById('mentoria-overlay');
+
+    function openMentoriaForm() {
+      mentoriaOverlay.querySelectorAll('input').forEach(el => el.value = '');
+      document.getElementById('mf-error').classList.remove('visible');
+      mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('mf-step-1').classList.add('active');
+      mentoriaOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMentoriaForm() {
+      mentoriaOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+      mentoriaSubmitting = false;
+    }
+
+    function val(id) { return (document.getElementById(id)?.value || '').trim() || 'não informado'; }
+
+    let mentoriaSubmitting = false;
+    async function submitMentoriaForm() {
+      if (mentoriaSubmitting) return;
+      const name  = document.getElementById('mf-name').value.trim();
+      const email = document.getElementById('mf-email').value.trim();
+      if (!name || !email) {
+        document.getElementById('mf-error').classList.add('visible');
+        return;
+      }
+      document.getElementById('mf-error').classList.remove('visible');
+      mentoriaSubmitting = true;
+      mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('mf-step-sending').classList.add('active');
+      try {
+        await fetch('https://formsubmit.co/ajax/bymayatoledo@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Nova inscrição Mentoria (página ESF): ' + name,
+            _cc: 'testlexiscale@gmail.com',
+            _replyto: email,
+            nome: name,
+            email: email,
+            whatsapp: val('mf-phone')
+          })
+        });
+      } catch(e) { console.error('Form submission error:', e); }
+      mentoriaOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('mf-step-pay').classList.add('active');
+      mentoriaSubmitting = false;
+    }
+
+    document.getElementById('mentoria-close').addEventListener('click', closeMentoriaForm);
+    mentoriaOverlay.addEventListener('click', e => { if (e.target === mentoriaOverlay) closeMentoriaForm(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMentoriaForm(); closeWaitlistForm(); } });
+
+    // ── Waitlist modal ──
+    const waitlistOverlay = document.getElementById('waitlist-overlay');
+
+    function openWaitlistForm() {
+      waitlistOverlay.querySelectorAll('input').forEach(el => el.value = '');
+      document.getElementById('wl-error').classList.remove('visible');
+      waitlistOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('wl-step-1').classList.add('active');
+      waitlistOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeWaitlistForm() {
+      waitlistOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    let waitlistSubmitting = false;
+    async function submitWaitlistForm() {
+      if (waitlistSubmitting) return;
+      const name  = document.getElementById('wl-name').value.trim();
+      const email = document.getElementById('wl-email').value.trim();
+      if (!name || !email) {
+        document.getElementById('wl-error').classList.add('visible');
+        return;
+      }
+      document.getElementById('wl-error').classList.remove('visible');
+      waitlistSubmitting = true;
+      try {
+        await fetch('https://formsubmit.co/ajax/bymayatoledo@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Lista de espera Mentoria (página ESF): ' + name,
+            _replyto: email,
+            nome: name,
+            email: email,
+            whatsapp: (document.getElementById('wl-phone').value || '').trim() || 'não informado'
+          })
+        });
+      } catch(e) { console.error('Waitlist submission error:', e); }
+      waitlistSubmitting = false;
+      waitlistOverlay.querySelectorAll('.mentoria-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('wl-step-done').classList.add('active');
+    }
+
+    document.getElementById('waitlist-close').addEventListener('click', closeWaitlistForm);
+    waitlistOverlay.addEventListener('click', e => { if (e.target === waitlistOverlay) closeWaitlistForm(); });
+
+    // ── LAUNCH WINDOW: driven by the same admin panel as the home page ──
+    (async function() {
+      try {
+        const res = await fetch('/api/settings');
+        if (!res.ok) return;
+        const data = await res.json();
+        const { mode, mentoria_text } = data;
+
+        const ann = document.getElementById('mentoria-announcement');
+        if (ann && mentoria_text) { ann.textContent = mentoria_text; ann.style.display = 'inline-block'; }
+
+        if (mode !== 'WAITLIST') return;
+
+        document.querySelectorAll('[onclick="openMentoriaForm()"]').forEach(btn => {
+          btn.setAttribute('onclick', 'openWaitlistForm()');
+          if (btn.textContent.trim() === 'Garantir minha vaga') btn.textContent = 'Entrar na lista de espera';
+        });
+      } catch { /* fail silently */ }
+    })();
+  </script>
+</body>
+</html>
