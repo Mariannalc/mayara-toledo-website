@@ -130,17 +130,21 @@
     }
     .section-sub { font-size: 1.125rem; color: var(--muted); max-width: 60ch; }
 
-    /* Para quem é */
-    .quem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
+    /* Para quem é: one big card */
     .quem-card {
       border: 1px solid var(--line); background: #fff9f2;
-      padding: 1.6rem 1.8rem; display: flex; gap: 1rem; align-items: flex-start;
+      padding: 2.4rem 2.6rem; margin-top: 2.4rem; max-width: 720px;
     }
-    .quem-card .mark {
-      flex-shrink: 0; width: 9px; height: 9px; border-radius: 50%;
-      background: var(--gold); margin-top: 0.55rem;
+    .quem-card ul { list-style: none; }
+    .quem-card li {
+      position: relative; padding: 0.9rem 0 0.9rem 1.8rem;
+      font-size: 1.0625rem;
     }
-    .quem-card p { font-size: 1.0625rem; }
+    .quem-card li + li { border-top: 1px solid var(--line); }
+    .quem-card li::before {
+      content: ''; position: absolute; left: 0; top: 1.45rem;
+      width: 9px; height: 9px; border-radius: 50%; background: var(--gold);
+    }
 
     /* Manifesto strip */
     .manifesto {
@@ -152,7 +156,7 @@
       max-width: 34ch; margin: 0 auto;
     }
 
-    /* Método — 4 encontros */
+    /* Metodo: 4 encontros */
     .sessions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
     .session-card {
       border: 1px solid var(--line); background: #fff9f2; padding: 2rem 1.8rem;
@@ -312,7 +316,8 @@
     @media (max-width: 820px) {
       nav { padding: 1rem 1.4rem; }
       section { padding: 4rem 1.4rem; }
-      .quem-grid, .sessions { grid-template-columns: 1fr; }
+      .sessions { grid-template-columns: 1fr; }
+      .quem-card { padding: 1.8rem 1.4rem; }
       .depo-grid { grid-template-columns: 1fr; gap: 1.1rem; }
       .hero-meta { gap: 1rem 1.6rem; }
       .mentoria-modal { padding: 2.2rem 1.5rem; }
@@ -334,7 +339,7 @@
     <div class="hero-divider reveal"></div>
     <p class="hero-sub reveal">
       Não é um curso sobre tendências. É um método de quatro encontros online e ao vivo
-      para você construir uma imagem coerente com quem se tornou — com clareza,
+      para você construir uma imagem coerente com quem se tornou, com clareza,
       intenção e elegância real.
     </p>
     <div class="hero-meta reveal">
@@ -350,12 +355,14 @@
   <section id="para-quem">
     <div class="inner">
       <span class="section-label reveal">Para quem é</span>
-      <h2 class="section-title reveal">Se você se reconhece aqui,<br>este programa é para você.</h2>
-      <div class="quem-grid reveal">
-        <div class="quem-card"><span class="mark"></span><p>Sente que o guarda-roupa está cheio, mas nunca tem o que vestir.</p></div>
-        <div class="quem-card"><span class="mark"></span><p>Quer parar de comprar por impulso e construir um estilo próprio.</p></div>
-        <div class="quem-card"><span class="mark"></span><p>Está em uma transição de vida e quer reinventar a própria imagem.</p></div>
-        <div class="quem-card"><span class="mark"></span><p>Busca mais confiança e clareza ao se vestir no dia a dia.</p></div>
+      <h2 class="section-title reveal">Se você se reconhece aqui, este programa é para você.</h2>
+      <div class="quem-card reveal">
+        <ul>
+          <li>Sente que o guarda-roupa está cheio, mas nunca tem o que vestir.</li>
+          <li>Quer parar de comprar por impulso e construir um estilo próprio.</li>
+          <li>Está em uma transição de vida e quer reinventar a própria imagem.</li>
+          <li>Busca mais confiança e clareza ao se vestir no dia a dia.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -474,7 +481,7 @@
       <div class="reveal">
         <details class="faq-item">
           <summary>Para quem é a mentoria Elegância sem Frescura?</summary>
-          <div class="faq-body"><p>Para mulheres que sentem que o guarda-roupa já não representa quem são, querem parar de comprar por impulso e desejam se vestir com mais clareza, elegância e intenção — sem depender de tendências ou de um armário cheio.</p></div>
+          <div class="faq-body"><p>Para mulheres que sentem que o guarda-roupa já não representa quem são, querem parar de comprar por impulso e desejam se vestir com mais clareza, elegância e intenção, sem depender de tendências ou de um armário cheio.</p></div>
         </details>
         <details class="faq-item">
           <summary>Preciso morar no Reino Unido para participar?</summary>

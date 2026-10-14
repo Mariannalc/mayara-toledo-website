@@ -95,6 +95,47 @@
     nav.scrolled .nav-cta { color: var(--burgundy); border-bottom-color: currentColor; }
     .nav-cta:hover { opacity: 0.6; }
 
+    /* ── Burger menu (mobile) ── */
+    .nav-burger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      width: 44px; height: 44px; padding: 10px;
+      flex-direction: column; justify-content: center; gap: 6px;
+    }
+    .nav-burger span {
+      display: block; height: 2px; width: 100%;
+      background: #F0E8DC;
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.35s ease;
+    }
+    nav.scrolled .nav-burger span, nav.menu-open .nav-burger span { background: var(--dark); }
+    nav.menu-open .nav-burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    nav.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+    nav.menu-open .nav-burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    nav.menu-open { background: rgba(246,239,231,0.98); }
+    nav.menu-open .nav-logo { color: var(--dark); }
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 99;
+      background: var(--cream);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.4rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a, .mobile-menu button {
+      font-family: 'Safira March', 'Cormorant Garamond', serif;
+      font-size: 1.9rem; color: var(--dark); text-decoration: none;
+      background: none; border: none; cursor: pointer;
+    }
+    .mobile-menu a:hover, .mobile-menu button:hover { color: var(--burgundy); }
+    .mobile-menu .mm-lang {
+      font-family: 'Pier Sans', 'Jost', sans-serif;
+      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      border: 1px solid var(--line); padding: 0.55rem 1.3rem;
+    }
+    @media (max-width: 900px) {
+      .nav-desktop { display: none; }
+      .nav-burger { display: flex; }
+    }
+
     /* ── FULL-SCREEN SNAP SECTIONS ── */
     .hero,
     .quem-sou, .servicos,
@@ -1999,12 +2040,22 @@
   <!-- NAV -->
   <nav id="nav">
     <a href="#" class="nav-logo">Mayara Toledo</a>
-    <span style="display:inline-flex;gap:1.4rem;align-items:center;">
+    <span class="nav-desktop" style="display:inline-flex;gap:1.4rem;align-items:center;">
       <a href="/elegancia-sem-frescura" class="nav-cta">Elegância sem Frescura</a>
       <a href="#servicos" class="nav-cta">Serviços</a>
       <a href="/en" class="nav-cta" title="English version" style="border:1px solid var(--line);padding:0.3rem 0.7rem;">EN</a>
     </span>
+    <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/elegancia-sem-frescura">Elegância sem Frescura</a>
+    <a href="#servicos" onclick="toggleMenu()">Serviços</a>
+    <button onclick="toggleMenu(); setTimeout(openIntake, 350);">Agendar conversa</button>
+    <a href="/en" class="mm-lang">English version</a>
+  </div>
 
   <!-- HERO — editorial two-column, full bleed -->
   <section class="hero">
@@ -2862,6 +2913,14 @@
         });
       } catch { /* fail silently — don't break the page */ }
     })();
+
+    // ── BURGER MENU ──
+    function toggleMenu() {
+      const open = document.getElementById('mobile-menu').classList.toggle('open');
+      document.getElementById('nav').classList.toggle('menu-open', open);
+      document.querySelector('.nav-burger').setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
 
     // ── STICKY NAV ──
     // Sticky nav
