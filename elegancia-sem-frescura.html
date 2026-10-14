@@ -55,6 +55,44 @@
       color: var(--cream); text-decoration: none;
     }
     .nav-cta:hover { color: var(--gold); }
+    nav.scrolled .nav-cta { color: var(--burgundy); }
+
+    /* ── Burger menu ── */
+    .nav-burger {
+      display: flex;
+      background: none; border: none; cursor: pointer;
+      width: 44px; height: 44px; padding: 10px;
+      flex-direction: column; justify-content: center; gap: 6px;
+    }
+    .nav-burger span {
+      display: block; height: 2px; width: 100%;
+      background: var(--cream);
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.35s ease;
+    }
+    nav.scrolled .nav-burger span, nav.menu-open .nav-burger span { background: var(--dark); }
+    nav.menu-open .nav-burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    nav.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+    nav.menu-open .nav-burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    nav.menu-open { background: rgba(246,239,231,0.98); }
+    nav.menu-open .nav-logo, nav.menu-open .nav-cta { color: var(--dark); }
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 99;
+      background: var(--cream);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.2rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a, .mobile-menu button.mm-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem; color: var(--dark); text-decoration: none;
+      background: none; border: none; cursor: pointer;
+    }
+    .mobile-menu a:hover, .mobile-menu button.mm-link:hover { color: var(--burgundy); }
+    .mobile-menu .mm-lang {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      border: 1px solid var(--line); padding: 0.55rem 1.3rem;
+    }
 
     /* ── Buttons ── */
     .btn-primary, .btn-gold, .btn-outline {
@@ -334,8 +372,22 @@
 
   <nav id="nav">
     <a class="nav-logo" href="/">Mayara Toledo</a>
-    <button class="nav-cta" style="background:none;border:none;cursor:pointer;" onclick="openMentoriaForm()">Garantir minha vaga</button>
+    <span style="display:inline-flex;gap:1rem;align-items:center;">
+      <button class="nav-cta" style="background:none;border:none;cursor:pointer;" onclick="openMentoriaForm()">Garantir minha vaga</button>
+      <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </span>
   </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#metodo" onclick="toggleMenu()">O método</a>
+    <a href="#depoimentos" onclick="toggleMenu()">Depoimentos</a>
+    <a href="#investimento" onclick="toggleMenu()">Investimento</a>
+    <a href="#faq" onclick="toggleMenu()">Perguntas frequentes</a>
+    <button class="mm-link" onclick="toggleMenu(); setTimeout(openMentoriaForm, 350);">Garantir minha vaga</button>
+    <a href="/" class="mm-lang">mayaratoledo.com</a>
+  </div>
 
   <!-- HERO -->
   <header class="hero">
@@ -605,6 +657,12 @@
     // ── Nav + reveal ──
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    function toggleMenu() {
+      const open = document.getElementById('mobile-menu').classList.toggle('open');
+      nav.classList.toggle('menu-open', open);
+      document.querySelector('.nav-burger').setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.12 });
@@ -728,8 +786,8 @@
 
         if (mode !== 'WAITLIST') return;
 
-        document.querySelectorAll('[onclick="openMentoriaForm()"]').forEach(btn => {
-          btn.setAttribute('onclick', 'openWaitlistForm()');
+        document.querySelectorAll('[onclick*="openMentoriaForm"]').forEach(btn => {
+          btn.setAttribute('onclick', btn.getAttribute('onclick').replace('openMentoriaForm', 'openWaitlistForm'));
           if (btn.textContent.trim() === 'Garantir minha vaga') btn.textContent = 'Entrar na lista de espera';
         });
       } catch { /* fail silently */ }
