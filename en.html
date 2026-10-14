@@ -44,7 +44,7 @@
       padding: 1.1rem 3rem;
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    nav.scrolled { background: rgba(250,246,240,0.95); box-shadow: 0 1px 0 var(--line); }
+    nav.scrolled { background: rgba(250,246,240,0.98); backdrop-filter: blur(6px); box-shadow: 0 1px 0 var(--line); }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.25rem; letter-spacing: 0.12em; color: var(--dark);
@@ -104,8 +104,10 @@
     }
     .hero-title em { font-style: italic; font-weight: 300; }
     .hero-divider { width: 56px; height: 2px; background: var(--champagne); }
+    .hero-format { font-size: 0.9rem; color: var(--gold-text); max-width: 46ch; line-height: 1.6; }
     .hero-sub { font-size: 1.02rem; color: var(--muted); max-width: 42ch; }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; }
+    .cta-note { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
     .hero-img { position: relative; background: var(--sand); overflow: hidden; }
     .hero-img img {
       width: 100%; height: 100%; object-fit: cover; object-position: top center;
@@ -231,12 +233,55 @@
       width: 7px; height: 7px; border-radius: 50%; background: var(--champagne);
     }
     .service-price {
-      display: flex; align-items: baseline; gap: 0.8rem; margin: 1.4rem 0 1.6rem;
+      display: flex; align-items: baseline; gap: 0.8rem; margin: 1.4rem 0 0.6rem;
     }
     .service-price .amount {
       font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: var(--dark);
     }
-    .service-price .note { font-size: 0.85rem; color: var(--muted); }
+    .service-note { font-size: 0.9rem; color: var(--muted); max-width: 54ch; margin-bottom: 1.6rem; }
+    .service-location { font-size: 0.95rem; color: var(--text); margin: 1.2rem 0 0; }
+    .service-location strong { font-weight: 500; }
+
+    /* ── Expandable blocks (native details/summary — keyboard accessible) ── */
+    .ps-details { border-bottom: 1px solid var(--line); }
+    .ps-details:first-of-type { border-top: 1px solid var(--line); margin-top: 1.4rem; }
+    .ps-details summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.9rem 0; cursor: pointer; list-style: none;
+      font-size: 1rem; font-weight: 400; color: var(--dark);
+    }
+    .ps-details summary::-webkit-details-marker { display: none; }
+    .ps-details summary::after {
+      content: '+'; flex-shrink: 0;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; line-height: 1;
+      color: var(--gold-text); transition: transform 0.3s ease;
+    }
+    .ps-details[open] summary::after { content: '−'; }
+    .ps-details summary:hover { color: var(--gold-text); }
+    .ps-details summary:focus-visible { outline: 2px solid var(--champagne); outline-offset: 3px; }
+    .ps-details .ps-body { padding: 0 1.8rem 1.1rem 0; }
+    .ps-details .ps-body p { font-size: 0.95rem; }
+    .ps-details .ps-body p + p { margin-top: 0.7rem; }
+    .ps-cta { margin-top: 1.8rem; }
+
+    /* ── Testimonials ── */
+    .testimonials { background: var(--offwhite); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .testi-card {
+      border: 1px solid var(--line); padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      background: var(--offwhite);
+    }
+    .testi-card blockquote {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.1rem; line-height: 1.6; color: var(--text);
+    }
+    .testi-card cite {
+      font-style: normal; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-text);
+      margin-top: auto;
+    }
+    .testi-note { font-size: 0.8rem; color: var(--muted); margin-top: 1.6rem; }
 
     /* Booking CTA — mosaic left, text centre, image breaking out on the right */
     .booking {
@@ -334,12 +379,18 @@
       }
       .hero-ctas .btn-outline { border-color: var(--champagne); color: var(--champagne); }
       .hero-ctas .btn-outline:hover { background: rgba(198,166,100,0.14); }
+      .section-header { margin-bottom: 1.6rem; }   /* tighter gap: Services title → Personal Styling */
       .about, .service, .service.flip, .booking { grid-template-columns: 1fr; gap: 2.2rem; }
       .service.flip .service-img { order: -1; }
-      .service + .service { margin-top: 5rem; }
+      .service + .service { margin-top: 4rem; }
       .service-img, .service.flip .service-img { margin: 0 1.6rem 1.6rem 0; }
       .ghost-num, .service.flip .ghost-num { top: -2.4rem; left: auto; right: 0; }
+      /* avoid repeating blazer portraits on mobile; cap intermediate photo heights */
+      #personal-styling .service-img { display: none; }
+      .service-img img, .booking-img img { max-height: 46vh; object-fit: cover; object-position: top center; }
       .about-img { margin: 0 1.1rem; }
+      .about-img img { max-height: 48vh; object-fit: cover; object-position: top center; }
+      .testi-grid { grid-template-columns: 1fr; gap: 1.2rem; }
       .booking { margin-top: 3rem; padding-bottom: 4rem; }
       .palette-mosaic { display: none; }
       .booking-img { order: -1; margin: -3rem 0 1.6rem 1.6rem; }
@@ -354,7 +405,7 @@
     <ul class="nav-links">
       <li class="nav-hide-mobile"><a href="#services">Services</a></li>
       <li class="nav-hide-mobile"><a href="#about">About</a></li>
-      <li><a href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a call</a></li>
+      <li><a href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a free call</a></li>
       <li><a class="nav-lang" href="/" title="Versão em português">PT</a></li>
     </ul>
   </nav>
@@ -365,14 +416,18 @@
       <span class="eyebrow reveal">Personal Stylist &amp; Colour Consultant · United Kingdom</span>
       <h1 class="hero-title reveal">Dress like the woman<br><em>you've become.</em></h1>
       <div class="hero-divider reveal"></div>
+      <p class="hero-format reveal">
+        Online personal styling, with in-person wardrobe edits available in the Chesterfield area,
+        and in-person colour analysis in Chesterfield.
+      </p>
       <p class="hero-sub reveal">
-        Personal styling and colour analysis for women who want clarity, confidence
-        and a wardrobe that works, without chasing trends.
+        For women who want clarity, confidence and a wardrobe that works, without chasing trends.
       </p>
       <div class="hero-ctas reveal">
-        <a class="btn-primary" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a free 25-minute call</a>
+        <a class="btn-primary" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a free call</a>
         <a class="btn-outline" href="#colour-analysis">Discover your colours</a>
       </div>
+      <p class="cta-note reveal">A free 25-minute online call.</p>
     </div>
     <div class="hero-img">
       <img src="mayara-en-25.jpg" alt="Mayara Toledo, personal stylist" fetchpriority="high">
@@ -384,7 +439,7 @@
   <section id="services">
     <div class="section-header">
       <span class="eyebrow reveal">Services</span>
-      <h2 class="section-title reveal">A private service, built around you</h2>
+      <h2 class="section-title reveal">Personal services, built around you</h2>
     </div>
 
     <div class="service reveal" id="personal-styling">
@@ -393,15 +448,36 @@
         <h3>A wardrobe that finally works</h3>
         <p>
           A one-to-one styling service for women whose wardrobe no longer reflects who they are.
-          Together we edit what you own, define your style direction and build outfits
-          you can trust — for work, for life, for you.
+          Together, we define your style direction, edit what you own and build outfits you feel
+          confident wearing — for work, for life, for you.
         </p>
-        <ul class="service-list">
-          <li>Wardrobe edit — what stays, what goes, what's missing</li>
-          <li>Personal style direction, grounded in your lifestyle</li>
-          <li>Outfit building and smarter shopping guidance</li>
-        </ul>
-        <a class="btn-primary" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Start with a free call</a>
+        <p class="service-note" style="margin-top:0.9rem;">
+          After your free initial call, we'll agree on the support that best suits your needs.
+          You'll then receive a personalised quote before booking.
+        </p>
+
+        <details class="ps-details">
+          <summary>Wardrobe edit — what stays, what goes and what's missing</summary>
+          <div class="ps-body">
+            <p>In person, we can go through your wardrobe together in your home. Any travel charges will be confirmed in advance and included in your quote.</p>
+            <p>Online, a 30-minute guidance session will help you understand how to edit your wardrobe yourself, at your own pace.</p>
+            <p>After your wardrobe edit, I recommend spending around a month using what you already own before planning any shopping. This gives you time to see what works in everyday life and identify what you actually need.</p>
+          </div>
+        </details>
+        <details class="ps-details">
+          <summary>Personal style direction, grounded in your lifestyle</summary>
+          <div class="ps-body">
+            <p>Together, we explore your routine, preferences and what you want your style to express. This gives you a clearer direction when choosing clothes and putting outfits together.</p>
+          </div>
+        </details>
+        <details class="ps-details">
+          <summary>Outfit building and smarter shopping guidance</summary>
+          <div class="ps-body">
+            <p>Learn how to wear the same piece in different ways, create more outfits from what you already own and make thoughtful shopping decisions. We'll identify genuine gaps in your wardrobe so that any new purchases have a clear purpose.</p>
+          </div>
+        </details>
+
+        <a class="btn-primary ps-cta" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a free call</a>
       </div>
       <div class="service-img">
         <span class="ghost-num" aria-hidden="true">01</span>
@@ -418,19 +494,24 @@
         <span class="eyebrow">Colour Analysis</span>
         <h3>Discover your colours</h3>
         <p>
-          A personal colour analysis using professional fabric draping. Discover the palette
-          that brings out your natural colouring — and makes getting dressed, shopping
-          and combining pieces effortlessly simple.
+          Discover the colours that complement your natural colouring through a personal analysis
+          using professional fabric draping. Gain practical guidance to make getting dressed,
+          shopping and combining colours easier.
         </p>
+        <p class="service-note" style="margin: 1rem 0 0;">Your session includes:</p>
         <ul class="service-list">
-          <li>Full draping session with professional colour fabrics</li>
-          <li>Your personal colour palette to shop with</li>
-          <li>Practical guidance to wear your colours every day</li>
+          <li>An individual colour analysis using professional fabric drapes, lasting approximately two hours.</li>
+          <li>A personal colour swatch fan to take home and use when shopping.</li>
+          <li>A digital guide with practical advice on wearing your colours, so you can revisit the recommendations whenever you need.</li>
         </ul>
+        <p class="service-location"><strong>Location:</strong> Chesterfield, Derbyshire — S42. The full address will be shared after booking.</p>
         <div class="service-price">
           <span class="amount">£175</span>
-          <span class="note">£25 deposit secures your session</span>
         </div>
+        <p class="service-note">
+          A £25 deposit secures your booking and is deducted from the total.
+          The remaining £150 is payable before your appointment begins.
+        </p>
         <a class="btn-primary" href="https://cal.com/mayaratoledo/discover-your-colours-personal-colour-analysis">Book your colour analysis</a>
       </div>
     </div>
@@ -446,6 +527,29 @@
     <div class="band band-dark"  style="background:#6e1f25;"><span>Burgundy</span></div>
   </div>
 
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-header">
+      <span class="eyebrow reveal">Testimonials</span>
+      <h2 class="section-title reveal">What women say about working with me</h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <blockquote>"Through the course, I learned about different styles and fabrics, what to look for when shopping and how to make more thoughtful choices. It completely changed my relationship with my wardrobe — and with myself!"</blockquote>
+        <cite>Elegância sem Frescura course participant</cite>
+      </div>
+      <div class="testi-card">
+        <blockquote>"Even our first call changed how I choose what to buy and wear. I can now see more clearly what works for me, and I feel happier and more comfortable in my clothes for different occasions, while still expressing the image I want."</blockquote>
+        <cite>Elegância sem Frescura course participant</cite>
+      </div>
+      <div class="testi-card">
+        <blockquote>"Having a cleared-out wardrobe has made such a difference. Honestly, just getting me to clear out my wardrobe made the course worth the investment — and I'm learning so much more from you."</blockquote>
+        <cite>Elegância sem Frescura course participant</cite>
+      </div>
+    </div>
+    <p class="testi-note reveal">Testimonials translated from Portuguese.</p>
+  </section>
+
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-img reveal">
@@ -453,22 +557,24 @@
     </div>
     <div class="about-body">
       <span class="eyebrow reveal">About Mayara</span>
-      <h2 class="section-title reveal">Image is not about clothes.<br>It's about coherence.</h2>
+      <h2 class="section-title reveal">Style that reflects who you are today.</h2>
       <div class="reveal">
         <p>
-          I grew up surrounded by women with a refined eye, where quality and elegance
-          mattered more than trends. I worked in fashion, lived behind the scenes of
-          television in Rio de Janeiro and, at 22, started from zero in England —
-          eventually reaching the corporate world of one of the largest law firms in the world.
+          I grew up in Brazil with a love of clothes, creativity and helping people find pieces
+          that suited them. At 22, I moved to England and eventually built a corporate career.
+          But through motherhood, responsibilities and a difficult chapter in my personal life,
+          I gradually lost touch with myself.
         </p>
         <p>
-          There I saw something I couldn't ignore: accomplished women, in positions of
-          leadership, who didn't feel represented by their own image. I recognised myself in that.
-          So I trained in image consultancy and colour analysis — first to transform myself.
+          I began studying image consultancy because I wanted to feel comfortable and well dressed
+          again. Alongside personal development, it helped me reconnect with the woman I had always
+          been — and express who I was becoming.
         </p>
-        <blockquote class="about-quote">
-          "When your image is aligned with who you are, everything around you starts to respond differently."
-        </blockquote>
+        <p>
+          That experience inspired Elegância sem Frescura (Elegance without Fuss) and the work I do
+          today. Through personal styling and colour analysis, I help women make thoughtful choices
+          and build wardrobes that support their lives, with comfort, confidence and room to evolve.
+        </p>
       </div>
     </div>
   </section>
@@ -494,10 +600,10 @@
     <div class="booking-body">
       <h2 class="reveal">Not sure where to start?<br><em>Let's talk style.</em></h2>
       <p class="reveal">
-        A free 25-minute call to understand where you are, what you need,
-        and which service makes sense for you. No pressure — just clarity.
+        A free 25-minute online call to talk about your wardrobe, what you need
+        and which service would suit you best. No pressure — just clarity.
       </p>
-      <a class="btn-primary reveal" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book your free call</a>
+      <a class="btn-primary reveal" href="https://cal.com/mayaratoledo/let-s-talk-style-free-25-minute-call">Book a free call</a>
     </div>
     <div class="booking-img reveal">
       <img src="mayara-en-43.jpg" alt="Mayara Toledo with colour palette fan" loading="lazy">

@@ -71,3 +71,35 @@ describe('PT tweaks (30/09)', () => {
     expect(html).toContain('href="/en"');
   });
 });
+
+describe('EN spec 09/10', () => {
+  test('standardised free-call CTA everywhere', () => {
+    expect((en.match(/Book a free call/g) || []).length).toBeGreaterThanOrEqual(4);
+    expect(en).not.toContain('Book a free 25-minute call<');
+    expect(en).not.toContain('Book your free call');
+  });
+  test('hero format line, region only (no street address)', () => {
+    expect(en).toContain('in-person colour analysis in Chesterfield');
+    expect(en).not.toMatch(/Ankerbold/i);
+  });
+  test('three keyboard-accessible expandable blocks', () => {
+    expect((en.match(/<details class="ps-details">/g) || []).length).toBe(3);
+  });
+  test('colour analysis: duration, location, deposit and balance', () => {
+    expect(en).toContain('approximately two hours');
+    expect(en).toContain('Chesterfield, Derbyshire — S42');
+    expect(en).toContain('The remaining £150 is payable before your appointment begins');
+  });
+  test('testimonials section between services and about', () => {
+    expect(en).toContain('What women say about working with me');
+    expect((en.match(/Elegância sem Frescura course participant/g) || []).length).toBe(3);
+    expect(en).toContain('Testimonials translated from Portuguese.');
+    expect(en.indexOf('id="testimonials"')).toBeLessThan(en.indexOf('id="about"'));
+  });
+  test('new About copy, old coherence title removed', () => {
+    expect(en).toContain('Style that reflects who you are today.');
+    expect(en).toContain('Elegance without Fuss');
+    expect(en).not.toContain("It's about coherence");
+    expect(en).not.toContain('starts to respond differently');
+  });
+});
